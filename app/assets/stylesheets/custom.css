@@ -137,6 +137,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
     color: #fff;
 }
 
+/* Home Screen */
+
+.welcome-text-box {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+
+    border: 1px solid rgba(255,64,255,.25);
+
+    background-color: rgba(255,255,255,0.05);
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+}
+
 /* New Fix Stuff */
 
 .newfix-form ul li {
