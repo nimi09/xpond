@@ -19,18 +19,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-::selection, textarea::-webkit-selection {
-    background: #f0f; /* Safari */
-}
-
-textarea::selection {
-    background: #f0f; /* Safari */    
-}
-
-::-moz-selection, textarea::-moz-selection {
-    background: #f0f; /* Firefox */
-}
-
 /* Head Menu */
 .block-head-menu {
     display: inline-block;
@@ -178,11 +166,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
 
 .newfix-line-seg {
     display: inline-block;
+
+    vertical-align: bottom;
 }
 
 .newfix-input {
     display: block;
-    margin-bottom: 9px;
     padding: 4px 6px;
     width: 150px;
     height: 20px;
@@ -261,9 +250,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
 }
 
 .newfix-convert-btn {
+    display: block;
+    margin: 0;
+    padding: 0;
     width: 150px;
-    height: 35px;
-    line-height: 35px;
+    height: 30px;
+    line-height: 30px;
 
     color: #fff;
 
