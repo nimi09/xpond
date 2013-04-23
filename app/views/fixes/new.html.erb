@@ -1,0 +1,11 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Add new FIX</h1>
+        <p>
+            <%= form_for(@fix) do |f| %>
+                <%= render 'fields', f: f %>
+                <%= f.submit "Add FIX", class: "newfix-submit-btn", tabindex: "4" %>
+            <% end %>
+        </p>
+    </div>
+</div>
