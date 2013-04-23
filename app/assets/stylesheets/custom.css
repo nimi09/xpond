@@ -76,9 +76,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
 }
 
 .logo a:hover {
-    background-color: #f0f;                  /* light Blue */
-    color: #FFF;                  /* light Blue */
-/*    background-color: rgba(0, 128, 204, .2);    /* light Blue but with alpha*/
+    background-color: #f0f;
+    background-color: rgba(255,0,255,.5);
+    color: #FFF;
 }
 
 .version {
@@ -122,7 +122,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
 }
 
 .menu-ul li a:hover {
-    background-color: #f0f;                  /* light Blue */
+    background-color: rgba(255,0,255,.5);
 }
 
 /* White Block */
@@ -145,8 +145,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
-
-    border: 1px solid rgba(255,64,255,.25);
 
     background-color: rgba(255,255,255,0.05);
 
@@ -394,6 +392,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
 }
 
 /* error stuff */
+
+.flash-success {
+    display: block;
+    margin: 0;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    width: 100%; /**/
+
+    color: #4b4;
+    background-color: rgba(64,255,64,.1);
+    border: 1px solid rgba(64,255,64,.3);
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
 .error-box {
     display: block;
     margin: 0;

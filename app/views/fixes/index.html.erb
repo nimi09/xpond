@@ -11,7 +11,7 @@
             </div>
             <textarea class="download-box">
                 <% @fix.each do |f| %>
- <%= f.lat %> <%= f.lon %> <%= f.name %>
+ <%= f.lat %>&nbsp;&nbsp;<%= f.lon %>&nbsp;&nbsp;<%= f.name %>
                 <% end %>
             </textarea>
     </div>
