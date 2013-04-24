@@ -1,12 +1,22 @@
 <script type="text/javascript" language="javascript">
-   var latsign = 1;
-   var lonsign = 1;
-   var absdlat = 0;
-   var absdlon = 0;
-   var absmlat = 0;
-   var absmlon = 0;
-   var absslat = 0;
-   var absslon = 0;
+    var latsign = 1;
+    var lonsign = 1;
+    var absdlat = 0;
+    var absdlon = 0;
+    var absmlat = 0;
+    var absmlon = 0;
+    var absslat = 0;
+    var absslon = 0;
+
+    function calc_lat() {
+        new_fix.fix_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
+        latsign=1;    
+    }
+
+    function calc_lon() {
+        new_fix.fix_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
+        lonsign=1;
+    }
 </script>
 
 
@@ -37,7 +47,8 @@
         <input type="textfield" class="newfix-input input-sec" maxlength="6" id="DMSlat" name="slat" placeholder="sec"  tabindex="7" onblur="            new_fix.slat.value = Math.abs(Math.round(new_fix.slat.value * 1000000.)/1000000);
                             absslat = Math.abs(Math.round(new_fix.slat.value * 1000000.));         // Note: kept as big integer for now, even if submitted as decimal
                             //Error checks
-                            if(absslat &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   new_fix.slat.value=''; }">
+                            if(absslat &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   new_fix.slat.value=''; }
+                            else { calc_lat(); }">
     </div>
     <div class="newfix-line-seg">
         <input type="button" class="newfix-convert-btn" value="convert to degrees" tabindex="8" onclick="
@@ -73,7 +84,8 @@
             new_fix.slon.value = Math.abs(Math.round(new_fix.slon.value * 1000000.)/1000000);
             absslon = Math.abs(Math.round(new_fix.slon.value * 1000000.));         // Note: kept as big integer for now, even if submitted as decimal
             //Error checks
-            if(absslon &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   new_fix.slon.value=''; }">
+            if(absslon &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   new_fix.slon.value=''; }
+            else { calc_lon(); }">
     </div>
     <div class="newfix-line-seg">
         <input type="BUTTON" value="convert to degrees" class="newfix-convert-btn"  tabindex="12" onclick="
