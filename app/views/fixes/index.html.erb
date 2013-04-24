@@ -9,10 +9,7 @@
                     <li>save the earth_fix.dat and you are done.</li>
                 </ul>
             </div>
-            <textarea class="download-box">
-                <% @fix.each do |f| %>
- <%= f.lat %>&nbsp;&nbsp;<%= f.lon %>&nbsp;&nbsp;<%= f.name %>
-                <% end %>
-            </textarea>
+            <textarea class="download-box"><% @fix.each do |f| %>
+ <%= f.lat %>&nbsp;&nbsp;<%= f.lon %>&nbsp;&nbsp;<%= f.name %><% end %></textarea>
     </div>
 </div>

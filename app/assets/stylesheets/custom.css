@@ -12,7 +12,8 @@ div.clear {
 
 body {
   font-family: "Trebuchet MS", "Arial", sans-serif;
-  background-color: #222;
+  background-color: #222; /* Das war es sehr lange .. aber bisschen hell */
+  background-color: #1b1b1b;
 }
 
 h1 {
@@ -146,12 +147,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
     margin-right: auto;
     padding: 20px;
 
+    color: rgba(255,255,255,.7);
+
     background-color: rgba(255,255,255,0.05);
 
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+}
 
+.welcome-text-box a, .welcome-text-box a:visited {
+    color: rgba(255,64,255,.8);
+    text-decoration: none;
+}
+
+.welcome-text-box a:hover {
+    color: rgba(255,64,255,.95);
 }
 
 /* New Fix Stuff */
@@ -165,7 +176,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
     display: block;
     margin: 0;
     padding: 0;
-    width: 100%;
+/*    width: 100%; /**/
     margin-bottom: 10px;
     padding: 10px;
 
@@ -237,7 +248,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
     display: block;
     float: left;    
     margin-top: 15px;
-    width: 165px;
+    margin-left: 10px;
+    width: 163px;
     height: 35px;
     line-height: 35px;
 
@@ -272,7 +284,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
     padding: 0;
     width: 150px;
     height: 30px;
-    line-height: 30px;
 
     color: #fff;
 
@@ -296,9 +307,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
 }
 
 .newfix-convert-btn:hover {
+    color: #eee;
     background: #004366;
-
-    text-shadow: 0px -1px 2px rgba(0, 0, 0, 1.5) !important;
+    text-shadow: 0px -1px 1px rgba(0, 0, 0, 1) !important;
 }
 
 /* Download Box*/
@@ -332,7 +343,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
 
     width: 100%;
 
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
 
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -344,15 +355,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
     display: inline-block;
     float: right;
     margin-bottom: 9px;
-    padding: 4px 6px;
+    padding: 4px 0 4px 6px;
     width: 47%;
     height: 300px;
 
     font-size: 15px;
     color: #eee;
-    background-color: #383838;
+    background-color: rgba(255,255,255,.05);
 
     border: 1px solid #555;
+    border: 1px solid #444;
 
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -398,7 +410,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
     margin: 0;
     margin-bottom: 30px;
     padding: 10px 20px;
-    width: 100%; /**/
+/*    width: 100%; /**/
 
     color: #4b4;
     background-color: rgba(64,255,64,.1);

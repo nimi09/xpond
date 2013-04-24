@@ -11,7 +11,7 @@ class FixesController < ApplicationController
     def create
         @fix = Fix.new(params[:fix])
         if @fix.save
-            flash[:success] = "FIX saved to the database"
+            flash[:success] = '"' + @fix.name + '" successfull saved to the database!'
             redirect_to new_fix_path
         else
             render 'new'
