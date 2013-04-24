@@ -77,9 +77,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#313131', end
 }
 
 .logo a:hover {
-    background-color: #f0f;
-    background-color: rgba(255,0,255,.5);
-    color: #FFF;
+//    background-color: #f0f;
+//    background-color: rgba(255,0,255,.5);
+    color: #F4F;
+    text-shadow: 0px -2px 1px rgba(0, 0, 0, 1);
 }
 
 .version {
