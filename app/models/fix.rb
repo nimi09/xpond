@@ -7,6 +7,5 @@ class Fix < ActiveRecord::Base
   validates :lon, presence: true, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to:  180}
 
   NAME_REGEX = /[a-zA-Z\d]{5}/
-  validates :name, presence: true, format: { with: NAME_REGEX }, length: {is: 5}
-  validates :name, uniqueness: true
+  validates :name, presence: true, format: { with: NAME_REGEX }, length: {is: 5}, uniqueness: { case_sensitive: false }
 end

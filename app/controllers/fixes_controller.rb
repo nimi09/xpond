@@ -1,7 +1,8 @@
 class FixesController < ApplicationController
 
     def index
-        @fix = Fix.find(:all)
+        @fix = Fix.order('name ASC').all
+#        @fix = Fix.find(:all)
     end
 
     def new
