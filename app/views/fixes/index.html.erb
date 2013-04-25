@@ -3,11 +3,13 @@
         <h1>Download</h1>
             <div class="download-instructions">
                 <ul>
-                    <li>mark the whole list (strg-a) in the textarea to the right</li>
-                    <li>copy (strg-c)</li><li>open the Resources/default data/earth_fix.dat file found in your main X-Plane folder with you prefered text editor</li>
-                    <li>scroll down and past the copied fixes before the last line "99"</li>
+                    <li>mark the whole list (strg-a) in the text area to the right</li>
+                    <li>copy (strg-c)</li>
+                    <li>open the Resources/default data/earth_fix.dat file that you find in your main X-Plane folder with your preferred text editor</li>
+                    <li>scroll down and paste the copied list above the last row "99"</li>
                     <li>save the earth_fix.dat and you are done.</li>
                 </ul>
+                <a href="map" class="newfix-submit-btn" style="margin-left:0; width:200px; text-decoration:none; text-align:center;">show FIX points on map</a>
             </div>
             <textarea class="download-box"><% @fix.each do |f| %>
  <%= number_with_precision(f.lat, precision: 6) %>&nbsp;&nbsp;<%= number_with_precision(f.lon, precision: 6) %>&nbsp;&nbsp;<%= f.name %><% end %></textarea>

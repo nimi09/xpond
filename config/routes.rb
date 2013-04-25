@@ -4,6 +4,7 @@ Xpond::Application.routes.draw do
   root to: 'static_pages#home'
 
   match '/newfix', to: 'fixes#new'
+  match '/map', to: 'static_pages#map'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

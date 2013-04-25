@@ -1,0 +1,144 @@
+    <script src="http://www.google.com/jsapi"></script>
+    <script type='text/javascript' src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'></script>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script type="text/javascript">
+        google.load('maps', '3', {
+            other_params: 'sensor=false'
+        });
+
+        // Onload handler to fire off the app.
+        google.setOnLoadCallback(initialize);
+
+        var map = null;
+        var markerClusterer = null;
+        var jsonglobal;
+
+        function refreshMap() {
+            if (markerClusterer) {
+                markerClusterer.clearMarkers();
+            }
+
+            var markers = [];
+            var starMarker = new google.maps.MarkerImage('assets/star-bw.png',
+                new google.maps.Size(25, 25),
+                new google.maps.Point(0,0),
+                new google.maps.Point(12, 12)
+            );
+/*            var bottleShade = new google.maps.MarkerImage('static/bottleshade.png',
+                // This marker is 20 pixels wide by 32 pixels tall.
+                new google.maps.Size(48, 48),
+                // The origin for this image is 0,0.
+                new google.maps.Point(0,0),
+                // The anchor for this image is the base of the flagpole at 0,32.
+                new google.maps.Point(4, 48)
+            );
+            var markercluster_style = [{url: 'static/markercluster-white.png',
+                                        height: 100,
+                                        width: 53,
+                                        textColor: '#222',
+                                        fontWeight: '800',
+                                        textSize: 11},
+                                        {url: 'static/markercluster-white.png',
+                                        height: 100,
+                                        width: 53,
+                                        textColor: '#222',
+                                        fontWeight: '800',
+                                        textSize: 11},
+                                        {url: 'static/markercluster-white.png',
+                                        height: 100,
+                                        width: 53,
+                                        textColor: '#222',
+                                        fontWeight: '800',
+                                        textSize: 11}];  */
+
+            var bounds = new google.maps.LatLngBounds();
+                   
+            for (var i = 0, length = jsonglobal.length; i < length; i++) {
+                var data = jsonglobal[i],
+                    data_latLng = new google.maps.LatLng(data.lat, data.lon);
+
+                bounds.extend(data_latLng);
+
+                var marker = new google.maps.Marker({
+                    position: data_latLng,
+                    title: data.name,
+                    map: map,
+                    draggable: false,
+//                    shadow: bottleShade,
+                    icon: starMarker
+                });
+
+                markers.push(marker);
+
+                var infoWindow = new google.maps.InfoWindow();
+/*                google.maps.event.addListener(marker, "click", function(e) {
+                    var iwstr = '';
+                    infoWindow.setContent(iwstr);
+                    infoWindow.open(map, marker);
+                });
+*/
+                (function(marker, data) {
+                    // Attaching a click event to the current marker
+                    google.maps.event.addListener(marker, "click", function(e) {
+                        var iwstr = '<h3 style="color: #222;">' + data.name + '</h3>';
+                        iwstr = iwstr + '<span style="color:#222">' + data.lat + ' / ' + data.lon + '</span>';
+                        infoWindow.setOptions( {
+                            content: iwstr,
+                            pixelOffset: new google.maps.Size(0,12)
+                        });
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, data);
+            }
+
+            map.fitBounds(bounds);
+
+
+            markerClusterer = new MarkerClusterer(map, markers, {
+                maxZoom: 15,
+                gridSize: 50,
+                styles: markercluster_style
+            });
+
+        }
+
+        function initialize() {
+
+            var latLng = new google.maps.LatLng(49.675, 10.101);
+
+            map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                zoom: 5,
+                center: latLng,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.LARGE
+                },
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+             });
+
+            // Load jason and place Marker
+            $.ajax({
+                url: "/fixes.json",
+                dataType: "json",
+                async: false,
+                success: function(json){
+                    jsonglobal = json;
+                }
+            }); 
+
+            refreshMap();
+
+        }
+    </script>
+
+<div class="std-block">
+    <div class="container">
+        <h1>Explore all added FIX points on the map</h1>
+        <div class="welcome-text-box">
+            <div id="mapCanvas" style="display: block; margin: 0; padding: 0; width: 100%; height: 500px;">
+            </div>
+        </div>
+    </div>
+</div>

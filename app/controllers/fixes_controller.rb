@@ -1,8 +1,12 @@
 class FixesController < ApplicationController
 
     def index
-        @fix = Fix.order('name ASC').all
 #        @fix = Fix.find(:all)
+        @fix = Fix.order('name ASC').all
+        respond_to do |format|
+            format.html
+            format.json { render json: @fix, root: false }
+        end
     end
 
     def new
