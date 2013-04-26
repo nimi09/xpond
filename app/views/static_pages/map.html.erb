@@ -83,7 +83,7 @@
                     // Attaching a click event to the current marker
                     google.maps.event.addListener(marker, "click", function(e) {
                         var iwstr = '<h3 style="color: #222;">' + data.name + '</h3>';
-                        iwstr = iwstr + '<span style="color:#222">' + data.lat + ' / ' + data.lon + '</span>';
+                        iwstr = iwstr + '<span style="color:#222">' + data.lat + ', ' + data.lon + '</span>';
                         infoWindow.setOptions( {
                             content: iwstr,
                             pixelOffset: new google.maps.Size(0,12)

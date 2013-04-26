@@ -51,7 +51,7 @@
                             else { calc_lat(); }">
     </div>
     <div class="newfix-line-seg">
-        <input type="button" class="newfix-convert-btn" value="convert to degrees" tabindex="8" onclick="
+        <input type="button" class="newfix-convert-btn" value="convert to decimal" tabindex="8" onclick="
                             new_fix.fix_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
                             latsign=1;">
     </div>
@@ -88,7 +88,7 @@
             else { calc_lon(); }">
     </div>
     <div class="newfix-line-seg">
-        <input type="BUTTON" value="convert to degrees" class="newfix-convert-btn"  tabindex="12" onclick="
+        <input type="BUTTON" value="convert to decimal" class="newfix-convert-btn"  tabindex="12" onclick="
             new_fix.fix_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
             lonsign=1;">
     </div>

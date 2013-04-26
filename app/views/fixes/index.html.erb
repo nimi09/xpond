@@ -9,7 +9,6 @@
                     <li>scroll down and paste the copied list above the last row "99"</li>
                     <li>save the earth_fix.dat and you are done.</li>
                 </ul>
-                <a href="map" class="newfix-submit-btn" style="margin-left:0; width:200px; text-decoration:none; text-align:center;">show FIX points on map</a>
             </div>
             <textarea class="download-box"><% @fix.each do |f| %>
  <%= number_with_precision(f.lat, precision: 6) %>&nbsp;&nbsp;<%= number_with_precision(f.lon, precision: 6) %>&nbsp;&nbsp;<%= f.name %><% end %></textarea>
