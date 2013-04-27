@@ -199,6 +199,37 @@ h3 {
     color: rgba(255,64,255,.95);
 }
 
+/* Map Stuff */
+
+.map-box {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+
+    color: #000;
+
+    background-color: rgba(255,255,255,0.05);
+
+    -webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, .1), 0 1px 2px rgba(0, 0, 0, 0.5) inset;
+            box-shadow: 0 1px 1px rgba(255, 255, 255, .1), 0 1px 2px rgba(0, 0, 0, 0.5) inset;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.map-box h3 {
+    top: 0;
+
+    color: #333;
+
+    font-family: 'PT Sans',​arial,​sans-serif;
+    font-weight: bold;
+    text-align: left;
+    text-shadow: none;
+}
 /* New Fix Stuff */
 
 .newfix-form ul li {
