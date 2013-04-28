@@ -11,6 +11,6 @@
                 </ul>
             </div>
             <textarea class="download-box"><% @fix.each do |f| %>
- <%= number_with_precision(f.lat, precision: 6) %> <%= number_with_precision(f.lon, precision: 6) %> <%= f.name %><% end %></textarea>
+ <%= number_with_precision(f.lat, precision: 6) %>&#32;&#32;<%= number_with_precision(f.lon, precision: 6) %>&#32;&#32;<%= f.name %><% end %></textarea>
     </div>
 </div>
