@@ -1,13 +1,18 @@
 <div class="std-block">
     <div class="container">
-        <h1>Add new FIX</h1>
+        <h1>Edit FIX point</h1>
+        <div class="welcom-text-box">
+            
         <div>
             <%= render 'shared/flash_messages', flash: flash %>
             <%= form_for @fix, html:{ id: "fix_form" }  do |f| %>
                 <%= render 'fields', f: f %>
-                <%= f.submit "Add FIX", class: "newfix-submit-btn", tabindex: "4" %>
+                <%= f.submit "Update", class: "newfix-submit-btn", tabindex: "4" %>
+                <%= link_to "Cancle", fixes_path, class: "newfix-submit-btn", tabindex: "20" %>
             <% end %>
         </div>
         <%= render 'describe_fix_format' %> 
+
+        </div>
     </div>
 </div>

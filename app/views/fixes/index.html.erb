@@ -1,16 +1,34 @@
 <div class="std-block">
     <div class="container">
-        <h1>Download</h1>
-            <div class="download-instructions">
-                <ul>
-                    <li>mark the whole list (strg-a) in the text area to the right</li>
-                    <li>copy (strg-c)</li>
-                    <li>open the Resources/default data/earth_fix.dat file that you find in your main X-Plane folder with your preferred text editor</li>
-                    <li>scroll down and paste the copied list above the last row "99"</li>
-                    <li>save the earth_fix.dat and you are done.</li>
-                </ul>
-            </div>
-            <textarea class="download-box"><% @fix.each do |f| %>
- <%= number_with_precision(f.lat, precision: 6) %>&#32;&#32;<%= number_with_precision(f.lon, precision: 6) %>&#32;&#32;<%= f.name %><% end %></textarea>
+        <h1>Showing all FIX points as list</h1>
+        <%= render 'shared/flash_messages', flash: flash %>
+<!--        <div class="fullwidth-box"> -->
+        <div class="sfl-block">
+
+            <ul class="showfix-line">
+                <% @fixes.each do |f| %>
+                    <li>
+                        <ul>
+                            <li class="sfl-name"><%= f.name %></li>
+                            <li class="sfl-latlon"><%= f.lat %></li>
+                            <li class="sfl-latlon"><%= f.lon %></li>
+                            <% if signed_in? %>
+                                <% if current_user.admin? %>
+                                    <li><%= f.user.name if f.user %></li>
+                                    <li><%= f.user.email if f.user %></li>
+                                    <li class="pull-right"><%= link_to "delete", f, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete the FIX point:\n\n" + f.name } %></li>
+                                    <li class="pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
+                                <% else %>
+                                    <li><%= f.user.name if current_user == f.user %></li>
+                                    <li class="pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
+                                <% end %>
+                            <% end %>
+                        </ul>
+                    </li>
+                <% end %>
+            </ul>
+
+
+        </div>  
     </div>
 </div>

@@ -1,5 +1,19 @@
+# == Schema Information
+#
+# Table name: fixes
+#
+#  id         :integer          not null, primary key
+#  lat        :float
+#  lon        :float
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
+#
+
 class Fix < ActiveRecord::Base
     attr_accessible :lat, :lon, :name
+    belongs_to :user
 
     before_save { |fix| fix.name = name.upcase }
 
@@ -8,6 +22,8 @@ class Fix < ActiveRecord::Base
 
     NAME_REGEX = /[a-zA-Z\d]{5}/
     validates :name, presence: true, format: { with: NAME_REGEX }, length: {is: 5}, uniqueness: { case_sensitive: false }
+
+#    default_scope order: 'fixes.created_at DESC'
 
 #    acts_as_gmappable
 

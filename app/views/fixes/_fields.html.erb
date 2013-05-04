@@ -9,12 +9,12 @@
     var absslon = 0;
 
     function calc_lat() {
-        new_fix.fix_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
+        fix_form.fix_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
         latsign=1;    
     }
 
     function calc_lon() {
-        new_fix.fix_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
+        fix_form.fix_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
         lonsign=1;
     }
 </script>
@@ -36,29 +36,29 @@
     <div class="newfix-line-devider"></div>
     <div class="newfix-line-seg">
         <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMSlat" placeholder="deg" name="dlat"  tabindex="5" onblur="
-                            if(new_fix.dlat.value &lt; 0)  { latsign = -1; }
-                            absdlat = Math.abs( Math.round(new_fix.dlat.value * 1000000.));
+                            if(fix_form.dlat.value &lt; 0)  { latsign = -1; }
+                            absdlat = Math.abs( Math.round(fix_form.dlat.value * 1000000.));
                             //Math.round is used to eliminate the small error caused by rounding in the computer:
                             //e.g. 0.2 is not the same as 0.20000000000284
                             //Error checks
-                            if(absdlat &gt; (90 * 1000000)) { alert(' Degrees Latitude must be in the range of -90 to 90. '); new_fix.dlat.value = '';  new_fix.dlat.value=''; new_fix.mlat.value=''; }">
+                            if(absdlat &gt; (90 * 1000000)) { alert(' Degrees Latitude must be in the range of -90 to 90. '); fix_form.dlat.value = '';  fix_form.dlat.value=''; fix_form.mlat.value=''; }">
     </div>
     <div class="newfix-line-seg">
-        <input type="textfield" class="newfix-input input-min" maxlength="2" id="DMSlat" name="mlat" placeholder="min"  tabindex="6" onblur="            new_fix.mlat.value = Math.abs(Math.round(new_fix.mlat.value * 1000000.)/1000000);  //integer
-                            absmlat = Math.abs(Math.round(new_fix.mlat.value * 1000000.));  //integer
+        <input type="textfield" class="newfix-input input-min" maxlength="2" id="DMSlat" name="mlat" placeholder="min"  tabindex="6" onblur="            fix_form.mlat.value = Math.abs(Math.round(fix_form.mlat.value * 1000000.)/1000000);  //integer
+                            absmlat = Math.abs(Math.round(fix_form.mlat.value * 1000000.));  //integer
                             //Error checks
-                            if(absmlat &gt;= (60 * 1000000)) {  alert(' Minutes Latitude must be in the range of 0 to 59. ');   new_fix.mlat.value=''; new_fix.slat.value=''; }">
+                            if(absmlat &gt;= (60 * 1000000)) {  alert(' Minutes Latitude must be in the range of 0 to 59. ');   fix_form.mlat.value=''; fix_form.slat.value=''; }">
     </div>
     <div class="newfix-line-seg">
-        <input type="textfield" class="newfix-input input-sec" maxlength="6" id="DMSlat" name="slat" placeholder="sec"  tabindex="7" onblur="            new_fix.slat.value = Math.abs(Math.round(new_fix.slat.value * 1000000.)/1000000);
-                            absslat = Math.abs(Math.round(new_fix.slat.value * 1000000.));         // Note: kept as big integer for now, even if submitted as decimal
+        <input type="textfield" class="newfix-input input-sec" maxlength="6" id="DMSlat" name="slat" placeholder="sec"  tabindex="7" onblur="            fix_form.slat.value = Math.abs(Math.round(fix_form.slat.value * 1000000.)/1000000);
+                            absslat = Math.abs(Math.round(fix_form.slat.value * 1000000.));         // Note: kept as big integer for now, even if submitted as decimal
                             //Error checks
-                            if(absslat &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   new_fix.slat.value=''; }
+                            if(absslat &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   fix_form.slat.value=''; }
                             else { calc_lat(); }">
     </div>
     <div class="newfix-line-seg">
         <input type="button" class="newfix-convert-btn" value="convert to decimal" tabindex="8" onclick="
-                            new_fix.fix_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
+                            fix_form.fix_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
                             latsign=1;">
     </div>
 </div>
@@ -71,31 +71,31 @@
     <div class="newfix-line-devider"></div>
     <div class="newfix-line-seg">
         <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMSlon" name="dlon" placeholder="deg"  tabindex="9" onblur="
-            if(new_fix.dlon.value &lt; 0)  { lonsign = -1; }
-            absdlon = Math.abs( Math.round(new_fix.dlon.value * 1000000.));
+            if(fix_form.dlon.value &lt; 0)  { lonsign = -1; }
+            absdlon = Math.abs( Math.round(fix_form.dlon.value * 1000000.));
             //Math.round is used to eliminate the small error caused by rounding in the computer:
             //e.g. 0.2 is not the same as 0.20000000000284
             //Error checks
-            if(absdlon &gt; (180 * 1000000)) {  alert(' Degrees Longitude must be in the range of -180 to 180. '); new_fix.dlon.value=''; new_fix.mlon.value='';}">
+            if(absdlon &gt; (180 * 1000000)) {  alert(' Degrees Longitude must be in the range of -180 to 180. '); fix_form.dlon.value=''; fix_form.mlon.value='';}">
     </div>
     <div class="newfix-line-seg">
         <input type="INT" class="newfix-input input-min" maxlength="2" id="DMSlon" name="mlon" placeholder="min"  tabindex="10" onblur="
-            new_fix.mlon.value = Math.abs(Math.round(new_fix.mlon.value * 1000000.)/1000000);  //integer
-            absmlon = Math.abs(Math.round(new_fix.mlon.value * 1000000));  //integer
+            fix_form.mlon.value = Math.abs(Math.round(fix_form.mlon.value * 1000000.)/1000000);  //integer
+            absmlon = Math.abs(Math.round(fix_form.mlon.value * 1000000));  //integer
             //Error checks
-            if(absmlon &gt;= (60 * 1000000))   {  alert(' Minutes Longitude must be in the range of 0 to 59. ');   new_fix.mlon.value=''; new_fix.slon.value=''; }">
+            if(absmlon &gt;= (60 * 1000000))   {  alert(' Minutes Longitude must be in the range of 0 to 59. ');   fix_form.mlon.value=''; fix_form.slon.value=''; }">
     </div>
     <div class="newfix-line-seg">
         <input type="INT" class="newfix-input input-sec" maxlength="6" id="DMSlon" name="slon" placeholder="sec"  tabindex="11" onblur="
-            new_fix.slon.value = Math.abs(Math.round(new_fix.slon.value * 1000000.)/1000000);
-            absslon = Math.abs(Math.round(new_fix.slon.value * 1000000.));         // Note: kept as big integer for now, even if submitted as decimal
+            fix_form.slon.value = Math.abs(Math.round(fix_form.slon.value * 1000000.)/1000000);
+            absslon = Math.abs(Math.round(fix_form.slon.value * 1000000.));         // Note: kept as big integer for now, even if submitted as decimal
             //Error checks
-            if(absslon &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   new_fix.slon.value=''; }
+            if(absslon &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   fix_form.slon.value=''; }
             else { calc_lon(); }">
     </div>
     <div class="newfix-line-seg">
         <input type="BUTTON" value="convert to decimal" class="newfix-convert-btn"  tabindex="12" onclick="
-            new_fix.fix_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
+            fix_form.fix_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
             lonsign=1;">
     </div>
 </div>

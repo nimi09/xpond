@@ -1,0 +1,24 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Login to XPOND</h1>
+        <div class="user-signup-box">
+            <%= form_for(:session, url: sessions_path) do |f| %>
+
+                <% flash.each do |key, value| %>
+                    <div class="flash-<%= key %>"><%= value %></div>
+                <% end %> 
+
+                <%= f.label :email %>
+                <%= f.text_field :email, class: "newfix-input signup-input" %>
+
+                <%= f.label :password %>
+                <%= f.password_field :password, class: "newfix-input signup-input" %>
+
+                <%= f.submit "Login", class: "newfix-submit-btn signup-submit-btn" %>
+            <% end %>
+            <div style="margin-top: 20px;">
+                New user? <a href="<%= signup_path%>">Sign up now!</a>
+            </div>
+        </div>
+    </div>
+</div>

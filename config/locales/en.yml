@@ -7,3 +7,6 @@ en:
         fix:
             lat: "Latitude"
             lon: "Longitude"
+
+        user:
+            password_digest: "Password"

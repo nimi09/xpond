@@ -1,0 +1,16 @@
+<div class="std-block">
+    <div class="container">
+        <h1>User Profile:</h1>
+        <h3 class="push-h3-up"><%= @user.name %></h3>
+        <% flash.each do |key, value| %>
+            <div class="flash-<%= key %>"><%= value %></div>
+        <% end %> 
+        <div class="user-signup-box">
+            <center>
+                <h1 class="h1-no-margin"><%= @user.fixes.count %></h1>
+                contributed FIX <%= "point".pluralize(@user.fixes.count) %>
+
+            </center>
+        </div>
+    </div>
+</div>

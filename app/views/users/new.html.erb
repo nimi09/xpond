@@ -1,0 +1,28 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Sign up to XPOND</h1>
+        <% flash.each do |key, value| %>
+            <div class="flash-<%= key %>"><%= value %></div>
+        <% end %> 
+        <div class="user-signup-box">
+            <%= form_for(@user) do |f| %>
+
+                <%= render 'shared/error_messages', object: f.object %>
+
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "newfix-input signup-input" %>
+
+                <%= f.label :email %>
+                <%= f.text_field :email, class: "newfix-input signup-input" %>
+
+                <%= f.label :password %>
+                <%= f.password_field :password, class: "newfix-input signup-input" %>
+
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, class: "newfix-input signup-input" %>
+
+                <%= f.submit "Create new account", class: "newfix-submit-btn signup-submit-btn" %>
+            <% end %>
+        </div>
+    </div>
+</div>

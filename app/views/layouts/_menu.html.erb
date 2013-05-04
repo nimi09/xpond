@@ -1,12 +1,28 @@
 <div class="block-head-menu">
     <div class="container">
         <ul class="logo">
-            <li><%= image_tag("star-route.png", alt: "logo", class: "logo-img") %><%= link_to "Open Nav Data for X Plane", root_path %></li>
+            <li><%= image_tag("fix-route.png", alt: "logo", class: "logo-img") %><%= link_to "Open Nav Data for X Plane", root_path %></li>
         </ul>
         <ul class="menu-ul">
-            <li><%= link_to "Add new FIX", new_fix_path %></li>
-            <li><%= link_to "Download", fixes_path %></li>
-            <li><%= link_to "FIX - Map", '/map' %></li>
+            <% if signed_in? %>
+                <li><%= link_to "Add new FIX", new_fix_path %></li>
+                <li><%= link_to "FIX - List", fixes_path %></li>
+                <li><%= link_to "FIX - Map", '/map' %></li>
+                <li><%= link_to "Download", download_path %></li>
+                <li class="menu-signin"><%= link_to current_user.name, current_user %>
+                    <ul>
+                        <li><%= link_to "All users", users_path %></li>
+                        <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                        <li class="dr-divider"></li>
+                        <li><%= link_to "logout", logout_path, method: "delete" %></li>
+                    </ul>
+                </li>
+            <% else %>
+                <li><%= link_to "Add new FIX", new_fix_path %></li>
+                <li><%= link_to "Download", download_path %></li>
+                <li><%= link_to "FIX - Map", '/map' %></li>
+                <li class="menu-signin"><%= link_to "login", login_path %></li>
+            <% end %>
         </ul>
     </div>
 </div>

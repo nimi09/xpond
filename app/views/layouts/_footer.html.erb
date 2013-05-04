@@ -1,0 +1,38 @@
+<div class="block-footer">
+    <div class="container">
+        <h3>
+            XPOND - the crowd sourced "Open Nav Data for X Plane"
+        </h3>
+        <div class="footer-menu-block">
+            <h4>XPOND</h4>
+            <ul>
+                <li><%= link_to 'Home', root_path %></li>
+                <li><%= link_to 'Download', download_path %></li>
+                <% if signed_in? %>
+                    <li><%= link_to 'log out', logout_path, method: "delete" %></li>
+                <% else %>
+                    <li><%= link_to 'Log in', login_path %></li>
+                    <li><%= link_to 'Sign up', signup_path %></li>
+                <% end %>
+            </ul>
+        </div>
+        <div class="footer-menu-block">
+            <h4>FIX</h4>
+            <ul>
+                <li><%= link_to 'Add new FIX', new_fix_path %></li>
+                <% if signed_in? %>
+                    <li><%= link_to 'FIX - list', fixes_path %></li>
+                    <li><%= link_to 'FIX - map', '/map' %></li>
+                <% end %>
+            </ul>
+        </div>
+        <div class="footer-menu-block">
+            <h4>LINKS</h4>
+            <ul>
+                <li><%= link_to 'X-Plane official', 'http://www.x-plane.com', :target => "_blank" %></li>
+                <li><%= link_to 'X-Plane Dev Blog', 'http://developer.x-plane.com', :target => "_blank" %></li>
+                <li><%= link_to 'Robin Peels - Airport & Navigation Data', 'http://data.x-plane.com/get_data.html', :target => "_blank" %></li>                
+            </ul>
+        </div>
+    </div>
+</div>

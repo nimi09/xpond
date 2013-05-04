@@ -1,0 +1,16 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Download</h1>
+            <div class="download-instructions">
+                <ul>
+                    <li>mark the whole list (strg-a) in the text area to the right</li>
+                    <li>copy (strg-c)</li>
+                    <li>open the Resources/default data/earth_fix.dat file that you find in your main X-Plane folder with your preferred text editor</li>
+                    <li>scroll down and paste the copied list above the last row "99"</li>
+                    <li>save the earth_fix.dat and you are done.</li>
+                </ul>
+            </div>
+            <textarea class="download-box"><% @fix.each do |f| %>
+ <%= number_with_precision(f.lat, precision: 6) %>&#32;&#32;<%= number_with_precision(f.lon, precision: 6) %>&#32;&#32;<%= f.name %><% end %></textarea>
+    </div>
+</div>

@@ -1,10 +1,17 @@
 Xpond::Application.routes.draw do
   resources :fixes
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'static_pages#home'
 
-  match '/newfix', to: 'fixes#new'
-  match '/map', to: 'static_pages#map'
+  match '/signup',  to: 'users#new'
+  match '/login',  to: 'sessions#new'
+  match '/logout', to: 'sessions#destroy', via: :delete
+
+  match '/newfix',   to: 'fixes#new'
+  match '/map',      to: 'static_pages#map'
+  match '/download', to: 'static_pages#download'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

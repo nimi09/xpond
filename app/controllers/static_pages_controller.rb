@@ -1,7 +1,12 @@
 class StaticPagesController < ApplicationController
-  def home
-  end
+    def home
+        @fix_count = Fix.count
+    end
 
-  def map
-  end
+    def download
+        @fix = Fix.order('name ASC').all
+    end
+
+    def map
+    end
 end

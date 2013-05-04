@@ -1,0 +1,22 @@
+<div class="std-block">
+    <div class="container">
+        <h1>All users</h1>
+        <%= render 'shared/flash_messages', flash: flash %>
+        <div class="welcome-text-box">
+            <%= will_paginate %>
+            <ul>
+                <% @users.each do |user| %>
+                    <li>
+                        <%= link_to user.name, user%>
+                        <%= user.fixes.count %>
+                        <%= "contribution".pluralize(user.fixes.count) %>
+                        <% if current_user.admin? && !current_user?(user) %>
+                            | <%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete user:\n\n" + user.name } %>
+                        <% end %>
+                    </li>
+                <% end %>
+            </ul>
+            <%= will_paginate %>
+        </div>
+    </div>
+</div>
