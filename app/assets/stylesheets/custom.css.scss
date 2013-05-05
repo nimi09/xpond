@@ -82,6 +82,18 @@ h4 {
     float: right;
 }
 
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.color-white {
+    color: #fff;
+}
+
 
 /* Head Menu */
 .block-head-menu {
@@ -419,9 +431,49 @@ h4 {
 }
 /* New Fix Stuff */
 
+.newfix-form {
+    display: block;
+    margin: 0;
+    margin-bottom: 15px;
+    padding: 0;
+    width: 100%;
+}
+
+.newfix-form ul {
+    display: inline-block;
+    margin: 0;
+    margin-right: 40px;
+    padding: 10px 20px !important;
+    width: auto;
+
+    vertical-align: top;
+
+    padding: 10px;
+
+    background-color: rgba(255, 255, 255, .05);
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+//    border: 1px solid red;
+}
+
 .newfix-form ul li {
+    display: block;
     margin-bottom: 10px;
+    height: 50px;
     line-height: 20px;
+
+    vertical-align: bottom;
+
+//    border: 1px solid green;
+}
+
+.newfix-form-convert-line {
+    display: block;
+    line-height: 50px;
+    vertical-align: bottom;    
 }
 
 .newfix-trans-line {
@@ -517,6 +569,7 @@ h4 {
 .input-deg { width: 40px; margin-right: 2px; }
 .input-min { width: 40px; margin-right: 2px; }
 .input-sec { width: 50px; margin-right: 2px; }
+.input-DMmin { width: 45px; margin-right: 2px; }
 
 .name-div {
     display: inline-block;
@@ -532,7 +585,7 @@ h4 {
     display: inline-block;
 //    float: left;    
     margin-top: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
     width: 163px;
     height: 35px;
     line-height: 35px;
@@ -625,8 +678,8 @@ h4 {
 .newfix-convert-btn {
     display: block;
     margin: 0;
-    padding: 0;
-    width: 150px;
+    padding: 0 5px;
+//    width: 150px;
     height: 30px;
 
     color: #fff;
