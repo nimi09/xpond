@@ -939,12 +939,14 @@ h4 {
 }
 
 .footer-menu-block {
+    @include box-sizing;
     display: inline-block;
     float: left;
     margin: 0;
     padding: 10px 20px;
     margin-top: 40px;
     min-width: 50px;
+    width: 32%;
 }
 
 .block-footer ul li a {
