@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 gem 'active_model_serializers'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'will_paginate', '3.0.3'
+gem 'bootstrap-will_paginate', '0.0.6'
 #gem "gmaps4rails", "1.5.6"
 
 # Bundle edge Rails instead:

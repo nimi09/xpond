@@ -3,7 +3,10 @@
         <h1>Showing all FIX points as list</h1>
         <%= render 'shared/flash_messages', flash: flash %>
 <!--        <div class="fullwidth-box"> -->
-        <div class="sfl-block">
+<!--        <div class="sfl-block">    -->
+        <div class="fullwidth-box align-center">
+
+            <%= will_paginate %>
 
             <ul class="showfix-line">
                 <% @fixes.each do |f| %>
@@ -28,6 +31,7 @@
                 <% end %>
             </ul>
 
+            <div class="pagination"><%= will_paginate %></div> 
 
         </div>  
     </div>

@@ -27,12 +27,12 @@ class FixesController < ApplicationController
     end
 
     def index
-#        @fix = Fix.find(:all)
-        @fixes = Fix.order('name ASC').all
-#        @users = User.all
         respond_to do |format|
-            format.html
-            format.json { render json: @fixes, root: false }
+            format.html { @fixes = Fix.paginate(page: params[:page], :per_page => 30).order("name ASC") }
+            format.json do
+                @allfixes = Fix.all
+                render json: @allfixes, root: false
+            end
         end
     end
 
