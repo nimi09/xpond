@@ -14,6 +14,7 @@
         var map = null;
         var markerClusterer = null;
         var jsonglobal;
+        var bounds;
 
         function refreshMap() {
             if (markerClusterer) {
@@ -21,20 +22,12 @@
             }
 
             var markers = [];
-            var starMarker = new google.maps.MarkerImage('assets/fix-marker.png',
+            var fixMarker = new google.maps.MarkerImage('assets/fix-marker.png',
                 new google.maps.Size(25, 25),
                 new google.maps.Point(0,0),
                 new google.maps.Point(12, 12)
             );
-/*            var bottleShade = new google.maps.MarkerImage('static/bottleshade.png',
-                // This marker is 20 pixels wide by 32 pixels tall.
-                new google.maps.Size(48, 48),
-                // The origin for this image is 0,0.
-                new google.maps.Point(0,0),
-                // The anchor for this image is the base of the flagpole at 0,32.
-                new google.maps.Point(4, 48)
-            );
-            var markercluster_style = [{url: 'static/markercluster-white.png',
+/*          var markercluster_style = [{url: 'static/markercluster-white.png',
                                         height: 100,
                                         width: 53,
                                         textColor: '#222',
@@ -52,8 +45,6 @@
                                         textColor: '#222',
                                         fontWeight: '800',
                                         textSize: 11}];  */
-
-            var bounds = new google.maps.LatLngBounds();
                    
             for (var i = 0, length = jsonglobal.length; i < length; i++) {
                 var data = jsonglobal[i],
@@ -66,11 +57,10 @@
                     title: data.name,
                     map: map,
                     draggable: false,
-//                    shadow: bottleShade,
-                    icon: starMarker
+                    icon: fixMarker
                 });
 
-                markers.push(marker);
+//                markers.push(marker);
 
                 var infoWindow = new google.maps.InfoWindow();
 /*                google.maps.event.addListener(marker, "click", function(e) {
@@ -96,17 +86,20 @@
             map.fitBounds(bounds);
 
 
+/*
             markerClusterer = new MarkerClusterer(map, markers, {
                 maxZoom: 15,
                 gridSize: 50,
                 styles: markercluster_style
-            });
+            }); */
 
         }
 
         function initialize() {
 
             var latLng = new google.maps.LatLng(49.675, 10.101);
+            
+            bounds = new google.maps.LatLngBounds();
 
             map = new google.maps.Map(document.getElementById('mapCanvas'), {
                 zoom: 5,
@@ -129,8 +122,61 @@
             }); 
 
             refreshMap();
+            load_ndb();
 
         }
+
+        function load_ndb() {
+            var json_ndb;
+            var ndbMarker = new google.maps.MarkerImage('assets/ndb-marker.png',
+                new google.maps.Size(25,25),
+                new google.maps.Point(0,0),
+                new google.maps.Point(12,12)
+            );
+
+            $.ajax({
+                url: "/ndbs.json",
+                dataType: "json",
+                async: false,
+                success: function(json){
+                    json_ndb = json;
+                }
+            });
+
+            for (var i = 0, length = json_ndb.length; i < length; i++) {
+                var ndb_data = json_ndb[i],
+                    ndb_data_latLng = new google.maps.LatLng(ndb_data.lat, ndb_data.lon);
+
+                bounds.extend(ndb_data_latLng);
+
+                var ndb_marker = new google.maps.Marker({
+                    position: ndb_data_latLng,
+                    title: ndb_data.identifier,
+                    map: map,
+                    draggable: false,
+                    icon: ndbMarker
+                });
+
+                var ndb_infoWindow = new google.maps.InfoWindow();
+
+                (function(ndb_marker, ndb_data) {
+                    // Attaching a click event to the current marker
+                    google.maps.event.addListener(ndb_marker, "click", function(e) {
+                        var iwstr = '<h3 style="color: #222;">' + ndb_data.identifier + '</h3>';
+                        iwstr = iwstr + '<span style="color:#222">' + ndb_data.lat + ', ' + ndb_data.lon + '</span>';
+                        ndb_infoWindow.setOptions( {
+                            content: iwstr,
+                            pixelOffset: new google.maps.Size(0,12)
+                        });
+                        ndb_infoWindow.open(map, ndb_marker);
+                    });
+                })(ndb_marker, ndb_data);
+            }
+
+            map.fitBounds(bounds);
+
+        }
+
     </script>
 
 <div class="std-block">

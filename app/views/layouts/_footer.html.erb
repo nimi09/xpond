@@ -8,6 +8,7 @@
             <ul>
                 <li><%= link_to 'Home', root_path %></li>
                 <li><%= link_to 'Download', download_path %></li>
+                <li><%= link_to 'Map', '/map' %></li>
                 <% if signed_in? %>
                     <li><%= link_to 'log out', logout_path, method: "delete" %></li>
                 <% else %>
@@ -22,7 +23,15 @@
                 <li><%= link_to 'Add new FIX', new_fix_path %></li>
                 <% if signed_in? %>
                     <li><%= link_to 'FIX - list', fixes_path %></li>
-                    <li><%= link_to 'FIX - map', '/map' %></li>
+                <% end %>
+            </ul>
+        </div>
+        <div class="footer-menu-block">
+            <h4>NDB</h4>
+            <ul>
+                <li><%= link_to 'Add new NDB', new_ndb_path %></li>
+                <% if signed_in? %>
+                    <li><%= link_to 'NDB - list', ndbs_path %></li>
                 <% end %>
             </ul>
         </div>

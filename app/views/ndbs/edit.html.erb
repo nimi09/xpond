@@ -1,0 +1,15 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Edit NDB</h1>
+        <div class="welcom-text-box">
+            <div>
+                <%= render 'shared/flash_messages', flash: flash %>
+                <%= form_for @ndb, html:{ id: "ndb_form" }  do |f| %>
+                    <%= render 'ndb_fields', f: f %>
+                    <%= f.submit "Update", class: "newfix-submit-btn edit-btn-width", tabindex: "4" %>
+                    <%= link_to "Cancle", ndbs_path, class: "newfix-submit-btn edit-btn-width", tabindex: "20" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

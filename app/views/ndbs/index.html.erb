@@ -1,0 +1,38 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Showing all NDBs as list</h1>
+        <%= render 'shared/flash_messages', flash: flash %>
+
+        <div class="fullwidth-box align-center">
+
+            <%= will_paginate %>
+
+            <ul class="showfix-line">
+                <% @ndbs.each do |f| %>
+                    <li>
+                        <ul>
+                            <li class="sfl-ndb-name"><%= f.identifier %></li>
+                            <li class="sfl-latlon"><%= f.lat %></li>
+                            <li class="sfl-latlon"><%= f.lon %></li>
+                            <li class="sfl-ndb-name"><%= f.elevation %></li>
+                            <li class="sfl-ndb-name"><%= f.frq %></li>
+                            <li class="sfl-ndb-name"><%= f.range %></li>
+                            <% if signed_in? %>
+                                <% if current_user.admin? %>
+                                    <li><%= f.user.name if f.user %></li>
+                                    <li><%= f.user.email if f.user %></li>
+                                    <li class="pull-right"><%= link_to "delete", f, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete the NDB:\n\n" + f.identifier } %></li>
+                                    <li class="pull-right"><%= link_to "Edit", edit_ndb_path(f) %></li>
+                                <% else %>
+                                    <li><%= f.user.name if current_user == f.user %></li>
+                                    <li class="pull-right"><%= link_to "Edit", edit_ndb_path(f) %></li>
+                                <% end %>
+                            <% end %>
+                        </ul>
+                    </li>
+                <% end %>
+            </ul>
+            <div class="pagination"><%= will_paginate %></div> 
+        </div> 
+    </div>
+</div>

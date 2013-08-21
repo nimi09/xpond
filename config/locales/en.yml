@@ -4,9 +4,14 @@
 en:
   activerecord:
     attributes:
+        user:
+            password_digest: "Password"
+
         fix:
             lat: "Latitude"
             lon: "Longitude"
 
-        user:
-            password_digest: "Password"
+        ndb:
+            lat: "Latitude"
+            lon: "Longitude"
+            frq: "Frequency"

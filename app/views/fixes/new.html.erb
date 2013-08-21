@@ -5,7 +5,7 @@
             <%= render 'shared/flash_messages', flash: flash %>
             <%= form_for @fix, html:{ id: "fix_form" }  do |f| %>
                 <%= render 'fields', f: f %>
-                <%= f.submit "Add FIX", class: "newfix-submit-btn", tabindex: "4" %>
+                <%= f.submit "Add FIX", class: "newfix-submit-btn new-btn-width", tabindex: "4" %>
             <% end %>
         </div>
         <%= render 'describe_fix_format' %> 

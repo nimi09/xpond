@@ -10,10 +10,20 @@
             <div class="fullwidth-box">
         <% end %>
             In case you have used the default FMS with default aircrafts you probably noticed that X Plane misses some FIX Points, when you try to enter routes found at appropriate sources or charts (e.g. SID and STAR routes).<br>To improve this, you can comfortably use this tool to add any FIX you don't find in the default FMS.<p>&nbsp;</p>
-            <h3>Current FIX count:</h3><h1 class="h1-glow"><%= @fix_count %></h1>
+            <center>
+                <div class="count-box">
+                    <h3>added FIX points:</h3><h1 class="h1-glow h1-no-margin"><%= @fix_count %></h1>
+                </div>
+                <div class="count-box">
+                    <h3>added NDBs:</h3><h1 class="h1-glow h1-no-margin"><%= @ndb_count %></h1>
+                </div>
+                <br>
+                <br>
+            </center>
             <div style="width: 100%; text-align: center;">
-                Feel free to conribute to the community by adding your first unknown FIX <u>without</u> signing up.<br>
-                <a href="newfix" class="newfix-submit-btn btn-large" style="margin-top:20px;">add new FIX now</a>
+                Feel free to conribute to the community by adding your first unknown FIX or NDB <u>without</u> signing up<br>now:<br>
+                <%= link_to "add new FIX", new_fix_path, class: "newfix-submit-btn btn-large", style: "margin-top: 20px;" %>
+                <%= link_to "add new NDB", new_ndb_path, class: "newfix-submit-btn btn-large", style: "margin-top: 20px;"%>
             </div>
             <br>
             <p style="font-size: 12px; color: #666; margin-left: auto; margin-right: auto; text-align:center;">

@@ -11,11 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429104724) do
+ActiveRecord::Schema.define(:version => 20130515083556) do
 
   create_table "fixes", :force => true do |t|
     t.float    "lat"
     t.float    "lon"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
+  create_table "ndbs", :force => true do |t|
+    t.float    "lat"
+    t.float    "lon"
+    t.integer  "elevation"
+    t.integer  "frq"
+    t.integer  "range"
+    t.string   "identifier"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

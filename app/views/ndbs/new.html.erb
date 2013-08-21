@@ -1,0 +1,13 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Add new NDB</h1>
+        <div>
+            <%= render 'shared/flash_messages', flash: flash %>
+            <%= form_for @ndb, html:{ id: "ndb_form" }  do |f| %>
+                <%= render 'ndb_fields', f: f %>
+                <%= f.submit "Add NDB", class: "newfix-submit-btn new-btn-width", tabindex: "4" %>
+            <% end %>
+        </div>
+
+    </div>
+</div>

@@ -1,4 +1,5 @@
 class FixesController < ApplicationController
+
     before_filter :admin_user, only: :destroy
 
     def new
@@ -59,7 +60,7 @@ class FixesController < ApplicationController
     end
 
     def destroy
-        flash[:success] =@fix.name + " destroyed."
+        flash[:success] = @fix.name + " destroyed."
         @fix.destroy
         redirect_to fixes_path
     end

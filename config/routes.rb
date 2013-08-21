@@ -1,7 +1,8 @@
 Xpond::Application.routes.draw do
-  resources :fixes
-  resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :users
+  resources :fixes
+  resources :ndbs
 
   root to: 'static_pages#home'
 

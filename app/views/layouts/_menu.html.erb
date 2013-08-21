@@ -5,11 +5,21 @@
         </ul>
         <ul class="menu-ul">
             <% if signed_in? %>
-                <li><%= link_to "Add new FIX", new_fix_path %></li>
-                <li><%= link_to "FIX - List", fixes_path %></li>
-                <li><%= link_to "FIX - Map", '/map' %></li>
+                <li class="sub-menu-right"><%= link_to "Add", "#" %>
+                    <ul>
+                        <li><%= link_to "FIX", new_fix_path %></li>
+                        <li><%= link_to "NDB", new_ndb_path %></li>
+                    </ul>
+                </li>
+                <li class="sub-menu-right"><%= link_to "Show List", "#" %>
+                    <ul>
+                        <li><%= link_to "FIX list", fixes_path %></li>
+                        <li><%= link_to "NDB list", ndbs_path %></li>
+                    </ul>
+                </li>
+                <li><%= link_to "Map", '/map' %></li>
                 <li><%= link_to "Download", download_path %></li>
-                <li class="menu-signin"><%= link_to current_user.name, current_user %>
+                <li class="menu-signin sub-menu-left"><%= link_to current_user.name, current_user %>
                     <ul>
                         <li><%= link_to "All users", users_path %></li>
                         <li><%= link_to "Settings", edit_user_path(current_user) %></li>
@@ -18,9 +28,14 @@
                     </ul>
                 </li>
             <% else %>
-                <li><%= link_to "Add new FIX", new_fix_path %></li>
+                <li class="sub-menu-right"><%= link_to "Add", "#" %>
+                    <ul>
+                        <li><%= link_to "FIX", new_fix_path %></li>
+                        <li><%= link_to "NDB", new_ndb_path %></li>
+                    </ul>
+                </li>
                 <li><%= link_to "Download", download_path %></li>
-                <li><%= link_to "FIX - Map", '/map' %></li>
+                <li><%= link_to "Map", '/map' %></li>
                 <li class="menu-signin"><%= link_to "login", login_path %></li>
             <% end %>
         </ul>
