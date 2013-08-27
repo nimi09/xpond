@@ -4,29 +4,41 @@
         <%= render 'shared/flash_messages', flash: flash %>
 <!--        <div class="fullwidth-box"> -->
 <!--        <div class="sfl-block">    -->
-        <div class="fullwidth-box align-center">
+        <div class="fullwidth-list-box align-center">
 
             <%= will_paginate %>
 
             <ul class="showfix-line">
+                <li>
+                    <div>
+                        <ul>
+                            <li class="sfl-name">Ident.</li>
+                            <li class="sfl-latlon">Lat</li>
+                            <li class="sfl-latlon">Lon</li>
+                            <li class="sfl-ndb-name">User</li>
+                        </ul>
+                    </div>
+                </li>
                 <% @fixes.each do |f| %>
                     <li>
-                        <ul>
-                            <li class="sfl-name"><%= f.name %></li>
-                            <li class="sfl-latlon"><%= f.lat %></li>
-                            <li class="sfl-latlon"><%= f.lon %></li>
-                            <% if signed_in? %>
-                                <% if current_user.admin? %>
-                                    <li><%= f.user.name if f.user %></li>
-                                    <li><%= f.user.email if f.user %></li>
-                                    <li class="pull-right"><%= link_to "delete", f, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete the FIX point:\n\n" + f.name } %></li>
-                                    <li class="pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
-                                <% else %>
-                                    <li><%= f.user.name if current_user == f.user %></li>
-                                    <li class="pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
+                        <div class="highlight">
+                            <ul>
+                                <li class="sfl-name"><%= f.name %></li>
+                                <li class="sfl-latlon"><%= number_with_precision(f.lat, precision: 8) %></li>
+                                <li class="sfl-latlon"><%= number_with_precision(f.lon, precision: 8) %></li>
+                                <% if signed_in? %>
+                                    <% if current_user.admin? %>
+                                        <li><%= f.user.name if f.user %></li>
+                                        <li><%= f.user.email if f.user %></li>
+                                        <li class="mute pull-right"><%= link_to "delete", f, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete the FIX point:\n\n" + f.name } %></li>
+                                        <li class="mute pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
+                                    <% else %>
+                                        <li><%= f.user.name if current_user == f.user %></li>
+                                        <li class="pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
+                                    <% end %>
                                 <% end %>
-                            <% end %>
-                        </ul>
+                            </ul>
+                        </div>
                     </li>
                 <% end %>
             </ul>

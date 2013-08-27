@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
-  font-family: 'PT Sans',​ 'Trebuchet MS', arial,​sans-serif;
+  font-family: PT Sans,​ Trebuchet MS, Arial,​ sans-serif;
 }
 
 div.clear {
@@ -369,6 +369,7 @@ h4 {
 
     color: #fff;
     background-color: #252525; /* Heroku brightnes // no saturation */
+/*    background-color: #241a24; /* Heroku Brightnes and Saturation */
 }
 
 .fullwidth-box {
@@ -391,6 +392,19 @@ h4 {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+}
+
+.fullwidth-list-box {
+    @include box-sizing;
+    display: block;
+    float: left;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+
+    color: rgba(255,255,255,.7);
+    text-shadow: 0px -1px 1px rgba(0, 0, 0, 1);
 }
 
 .home-login-box {
@@ -819,41 +833,53 @@ h4 {
 
 .showfix-line li {
     display: block;
-    margin-bottom: 15px;
+    margin: 0;
+    padding: 6px 0;
+    vertical-align: middle;
 
-    background: rgba(255,255,255,.05);
+//    border-bottom: 1px solid #664166;
 
-    border: 1px solid #111;
-
-    -webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, .1), 0 1px 2px rgba(0, 0, 0, 0.5) inset;
-            box-shadow: 0 1px 1px rgba(255, 255, 255, .1), 0 1px 2px rgba(0, 0, 0, 0.5) inset;
-
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    background: -moz-linear-gradient(left,  rgba(102,65,106,0) 0%, rgba(102,65,106,0.1) 1%, rgba(102,65,106,1) 10%, rgba(102,65,102,1) 90%, rgba(102,65,102,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(102,65,106,0)), color-stop(1%,rgba(102,65,106,0.1)), color-stop(10%,rgba(102,65,106,1)), color-stop(90%,rgba(102,65,102,1)), color-stop(100%,rgba(102,65,102,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(102,65,106,0) 0%,rgba(102,65,106,0.1) 1%,rgba(102,65,106,1) 10%,rgba(102,65,102,1) 90%,rgba(102,65,102,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(102,65,106,0) 0%,rgba(102,65,106,0.1) 1%,rgba(102,65,106,1) 10%,rgba(102,65,102,1) 90%,rgba(102,65,102,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(102,65,106,0) 0%,rgba(102,65,106,0.1) 1%,rgba(102,65,106,1) 10%,rgba(102,65,102,1) 90%,rgba(102,65,102,0) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(102,65,106,0) 0%,rgba(102,65,106,0.1) 1%,rgba(102,65,106,1) 10%,rgba(102,65,102,1) 90%,rgba(102,65,102,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0066416a', endColorstr='#00664166',GradientType=1 ); /* IE6-9 */
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
 }
 
-.showfix-line li:hover {
-    background: rgba(255,128,255,.1);
+.showfix-line li div {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    border-left: 3px solid rgba(0,0,0,0);
 }
 
-.showfix-line li ul {
+.showfix-line li:hover div.highlight {
+    color: #fff;
+    border-left: 3px solid #ff00ff;
+}
+
+.showfix-line li div ul li.mute {
+    visibility: hidden;
+}
+
+.showfix-line li:hover div ul li.mute {
+    visibility: visible;
+}
+
+.showfix-line li div ul {
     display: block;
     margin: 0;
     padding: 0 10px;
 }
 
-.showfix-line li ul li {
-    -webkit-box-shadow: none;
-            box-shadow: none;
-
-}
-
-.showfix-line li:hover ul li {
-    background: none;
-}
-
-.showfix-line li ul li {
+.showfix-line li div ul li {
     display: inline-block;
     margin: 0;
     padding: 4px 6px;
@@ -864,12 +890,14 @@ h4 {
     border: 0;
 }
 
-.showfix-line li ul li a {
-/*    color: rgba(255,64,255,.5); */
+.showfix-line li div ul li a {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #b876b8; /* Light Pink */
+    color: #ff44ff; /* full Pink */
     text-decoration: none;
 }
 
-.showfix-line li ul li a:hover {
+.showfix-line li div ul li a:hover {
     color: #fff !important;
 }
 .sfl-name { /*ShowFixLine-name */
@@ -877,7 +905,7 @@ h4 {
 }
 
 .sfl-latlon { /*ShowFixLine-LatitudeLongitude */
-    width: 140px;
+    width: 100px;
 }
 
 .sfl-ndb-name { /*ShowNDB-name*/
@@ -933,7 +961,11 @@ h4 {
     width: 47%;
     width: 400px;
     height: 300px;
+ 
+    white-space: pre;
+    word-wrap: normal;
 
+    font-family: monospace;
     font-size: 15px;
     color: #eee;
     background-color: rgba(255,255,255,.05);
@@ -941,9 +973,9 @@ h4 {
     border: 1px solid #555;
     border: 1px solid #444;
 
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+//    -webkit-border-radius: 3px;
+//    -moz-border-radius: 3px;
+//    border-radius: 3px;
 
     transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
 
@@ -1041,7 +1073,7 @@ h4 {
     padding: 10px 20px;
     margin-top: 40px;
     min-width: 50px;
-    width: 24%;
+    width: 19%;
 }
 
 .block-footer ul li a {

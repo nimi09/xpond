@@ -122,7 +122,59 @@
             }); 
 
             refreshMap();
+            load_vor();
             load_ndb();
+
+        }
+
+        function load_vor() {
+            var json_vor;
+            var vorMarker = new google.maps.MarkerImage('assets/vor-marker.png',
+                new google.maps.Size(25,25),
+                new google.maps.Point(0,0),
+                new google.maps.Point(12,12)
+            );
+
+            $.ajax({
+                url: "/vors.json",
+                dataType: "json",
+                async: false,
+                success: function(json){
+                    json_vor = json;
+                }
+            });
+
+            for (var i = 0, length = json_vor.length; i < length; i++) {
+                var vor_data = json_vor[i],
+                    vor_data_latLng = new google.maps.LatLng(vor_data.lat, vor_data.lon);
+
+                bounds.extend(vor_data_latLng);
+
+                var vor_marker = new google.maps.Marker({
+                    position: vor_data_latLng,
+                    title: vor_data.identifier,
+                    map: map,
+                    draggable: false,
+                    icon: vorMarker
+                });
+
+                var vor_infoWindow = new google.maps.InfoWindow();
+
+                (function(vor_marker, vor_data) {
+                    // Attaching a click event to the current marker
+                    google.maps.event.addListener(vor_marker, "click", function(e) {
+                        var iwstr = '<h3 style="color: #222;">' + vor_data.identifier + '</h3>';
+                        iwstr = iwstr + '<span style="color:#222">' + vor_data.lat + ', ' + vor_data.lon + '</span>';
+                        vor_infoWindow.setOptions( {
+                            content: iwstr,
+                            pixelOffset: new google.maps.Size(0,12)
+                        });
+                        vor_infoWindow.open(map, vor_marker);
+                    });
+                })(vor_marker, vor_data);
+            }
+
+            map.fitBounds(bounds);
 
         }
 

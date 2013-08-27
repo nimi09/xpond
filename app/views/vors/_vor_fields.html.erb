@@ -1,0 +1,219 @@
+<script type="text/javascript" language="javascript">
+    var DMlatsign = 1;
+    var DMlonsign = 1;
+    var DMabsdlat = 0;
+    var DMabsdlon = 0;
+    var DMabsmlat = 0;
+    var DMabsmlon = 0;
+
+    var latsign = 1;
+    var lonsign = 1;
+    var absdlat = 0;
+    var absdlon = 0;
+    var absmlat = 0;
+    var absmlon = 0;
+    var absslat = 0;
+    var absslon = 0;
+
+    function calc_lat() {
+        vor_form.vor_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
+        latsign=1;    
+    }
+
+    function calc_lon() {
+        vor_form.vor_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
+        lonsign=1;
+    }
+</script>
+
+
+<%= render 'shared/error_messages', object: f.object %>
+
+<div class="newfix-form">
+    <ul class="main-input-width">
+        <li>
+            <h3 class="align-left">Input VOR here</h3>
+            <h4 class="align-left  color-white">Decimal Degrees</h4>
+        </li>
+        <li>
+            <%= f.label :lat, "Latitude:" %>
+            <%= f.text_field :lat, class: "newfix-input", maxlength: "17", tabindex: "1" %>
+        </li>
+
+        <li>
+            <%= f.label :lon, "Longitude:" %>
+            <%= f.text_field :lon, class: "newfix-input", maxlength: "17", tabindex: "2" %>
+        </li>
+
+        <li>
+            <%= f.label :elevation, "Elevation in ft:" %>
+            <%= f.text_field :elevation, class: "newfix-input", maxlength: "6", tabindex: "3" %>
+        </li>
+
+        <li>
+            <%= f.label :frq, "Frequency in KHz:" %>
+            <%= f.text_field :frq, class: "newfix-input", maxlength: "3", tabindex: "3" %>
+        </li>
+
+        <li>
+            <%= f.label :range, "Maximum reception range in nm:" %>
+            <%= f.text_field :range, class: "newfix-input", maxlength: "5", tabindex: "3" %>
+        </li>
+
+        <li>
+            <%= f.label :slaved, "Slaved variation for VOR:" %>
+            <%= f.text_field :slaved, class: "newfix-input", maxlength: "7", tabindex: "4" %>
+        </li>
+
+        <li>
+            <%= f.label :identifier, "VOR identifier:" %>
+            <%= f.text_field :identifier, class: "newfix-input", maxlength: "4", tabindex: "5" %>
+        </li>
+
+        <li>
+            <%= f.label :name, 'Name + VOR, VORTAC or VOR-DME:' %>
+            <%= f.text_field :name, class: "newfix-input", maxlength: "50", tabindex: "6" %>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            <h3 class="align-left">Convert</h3>
+            <h4 class="align-left color-white">Degrees / Minutes</h4>
+        </li>
+        
+        <li>
+            <div class="newfix-form-convert-line">
+                <div class="newfix-line-seg">
+                    <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMlat" placeholder="deg" name="DMdlat"  tabindex="7" onblur="
+                                        if(vor_form.DMdlat.value &lt; 0)  { DMlatsign = -1; }
+                                        DMabsdlat = Math.abs( Math.round(vor_form.DMdlat.value * 1000000.));
+                                        //Math.round is used to eliminate the small error caused by rounding in the computer:
+                                        //e.g. 0.2 is not the same as 0.20000000000284
+                                        //Error checks
+                                        if(DMabsdlat &gt; (90 * 1000000)) { alert(' Degrees Latitude must be in the range of -90 to 90. '); vor_form.DMdlat.value = '';  vor_form.DMmlat.value=''; }">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="textfield" class="newfix-input input-DMmin" maxlength="6" id="DMlat" name="DMmlat" placeholder="min"  tabindex="8" onblur="
+                                        vor_form.DMmlat.value = Math.abs(Math.round(vor_form.DMmlat.value * 1000000.)/1000000);  //integer
+                                        DMabsmlat = Math.abs(Math.round(vor_form.DMmlat.value * 1000000.));  //integer
+                                        //Error checks
+                                        if(DMabsmlat &gt;= (60 * 1000000)) {  alert(' Minutes Latitude must be in the range of 0 to 59. ');   vor_form.DMmlat.value=''; }
+                                        else {
+                                            vor_form.vor_lat.value = Math.round(DMabsdlat + (DMabsmlat/60.) ) * DMlatsign/1000000;
+                                        DMlatsign=1; }">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="button" class="newfix-convert-btn" value="convert" tabindex="9" onclick="
+                                        vor_form.vor_lat.value = Math.round(DMabsdlat + (DMabsmlat/60.) ) * DMlatsign/1000000;
+                                        DMlatsign=1;">
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div class="newfix-form-convert-line">
+                <div class="newfix-line-seg">
+                    <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMlon" name="DMdlon" placeholder="deg"  tabindex="10" onblur="
+                        if(vor_form.DMdlon.value &lt; 0)  { DMlonsign = -1; }
+                        DMabsdlon = Math.abs( Math.round(vor_form.DMdlon.value * 1000000.));
+                        //Math.round is used to eliminate the small error caused by rounding in the computer:
+                        //e.g. 0.2 is not the same as 0.20000000000284
+                        //Error checks
+                        if(DMabsdlon &gt; (180 * 1000000)) {  alert(' Degrees Longitude must be in the range of -180 to 180. '); vor_form.DMdlon.value=''; vor_form.DMmlon.value='';}">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="INT" class="newfix-input input-DMmin" maxlength="6" id="DMlon" name="DMmlon" placeholder="min"  tabindex="11" onblur="
+                        vor_form.DMmlon.value = Math.abs(Math.round(vor_form.DMmlon.value * 1000000.)/1000000);  //integer
+                        DMabsmlon = Math.abs(Math.round(vor_form.DMmlon.value * 1000000));  //integer
+                        //Error checks
+                        if(DMabsmlon &gt;= (60 * 1000000))   {  alert(' Minutes Longitude must be in the range of 0 to 59. ');   vor_form.DMmlon.value=''; }
+                        else {
+                            vor_form.vor_lon.value = Math.round(DMabsdlon + (DMabsmlon/60) ) * DMlonsign/1000000;
+                        DMlonsign=1; }">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="BUTTON" value="convert" class="newfix-convert-btn"  tabindex="12" onclick="
+                        vor_form.vor_lon.value = Math.round(DMabsdlon + (DMabsmlon/60) ) * DMlonsign/1000000;
+                        DMlonsign=1;">
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            <h3 class="align-left">Convert</h3>
+            <h4 class="align-left color-white">Degrees / Minutes / Seconds</h4>
+        </li>
+        <li>
+            <div class="newfix-form-convert-line">
+                <div class="newfix-line-seg">
+                    <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMSlat" placeholder="deg" name="dlat"  tabindex="13" onblur="
+                                        if(vor_form.dlat.value &lt; 0)  { latsign = -1; }
+                                        absdlat = Math.abs( Math.round(vor_form.dlat.value * 1000000.));
+                                        //Math.round is used to eliminate the small error caused by rounding in the computer:
+                                        //e.g. 0.2 is not the same as 0.20000000000284
+                                        //Error checks
+                                        if(absdlat &gt; (90 * 1000000)) { alert(' Degrees Latitude must be in the range of -90 to 90. '); vor_form.dlat.value = '';  vor_form.dlat.value=''; vor_form.mlat.value=''; }">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="textfield" class="newfix-input input-min" maxlength="2" id="DMSlat" name="mlat" placeholder="min"  tabindex="14" onblur="            vor_form.mlat.value = Math.abs(Math.round(vor_form.mlat.value * 1000000.)/1000000);  //integer
+                                        absmlat = Math.abs(Math.round(vor_form.mlat.value * 1000000.));  //integer
+                                        //Error checks
+                                        if(absmlat &gt;= (60 * 1000000)) {  alert(' Minutes Latitude must be in the range of 0 to 59. ');   vor_form.mlat.value=''; vor_form.slat.value=''; }">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="textfield" class="newfix-input input-sec" maxlength="6" id="DMSlat" name="slat" placeholder="sec"  tabindex="15" onblur="            vor_form.slat.value = Math.abs(Math.round(vor_form.slat.value * 1000000.)/1000000);
+                                        absslat = Math.abs(Math.round(vor_form.slat.value * 1000000.));         // Note: kept as big integer for now, even if submitted as decimal
+                                        //Error checks
+                                        if(absslat &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   vor_form.slat.value=''; }
+                                        else { calc_lat(); }">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="button" class="newfix-convert-btn" value="convert" tabindex="16" onclick="
+                                        vor_form.vor_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
+                                        latsign=1;">
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div class="newfix-form-convert-line">
+                <div class="newfix-line-seg">
+                    <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMSlon" name="dlon" placeholder="deg"  tabindex="17" onblur="
+                        if(vor_form.dlon.value &lt; 0)  { lonsign = -1; }
+                        absdlon = Math.abs( Math.round(vor_form.dlon.value * 1000000.));
+                        //Math.round is used to eliminate the small error caused by rounding in the computer:
+                        //e.g. 0.2 is not the same as 0.20000000000284
+                        //Error checks
+                        if(absdlon &gt; (180 * 1000000)) {  alert(' Degrees Longitude must be in the range of -180 to 180. '); vor_form.dlon.value=''; vor_form.mlon.value='';}">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="INT" class="newfix-input input-min" maxlength="2" id="DMSlon" name="mlon" placeholder="min"  tabindex="18" onblur="
+                        vor_form.mlon.value = Math.abs(Math.round(vor_form.mlon.value * 1000000.)/1000000);  //integer
+                        absmlon = Math.abs(Math.round(vor_form.mlon.value * 1000000));  //integer
+                        //Error checks
+                        if(absmlon &gt;= (60 * 1000000))   {  alert(' Minutes Longitude must be in the range of 0 to 59. ');   vor_form.mlon.value=''; vor_form.slon.value=''; }">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="INT" class="newfix-input input-sec" maxlength="6" id="DMSlon" name="slon" placeholder="sec"  tabindex="19" onblur="
+                        vor_form.slon.value = Math.abs(Math.round(vor_form.slon.value * 1000000.)/1000000);
+                        absslon = Math.abs(Math.round(vor_form.slon.value * 1000000.));         // Note: kept as big integer for now, even if submitted as decimal
+                        //Error checks
+                        if(absslon &gt; (59.99999999 * 1000000)) {  alert(' Minutes Latitude must be 0 or greater \n and less than 60. ');   vor_form.slon.value=''; }
+                        else { calc_lon(); }">
+                </div>
+                <div class="newfix-line-seg">
+                    <input type="BUTTON" value="convert" class="newfix-convert-btn"  tabindex="20" onclick="
+                        vor_form.vor_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
+                        lonsign=1;">
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+

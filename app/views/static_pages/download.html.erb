@@ -7,7 +7,7 @@
             <br>
             <h4>General Information</h4>
             X Plane stores the navigational data in two different text-like files called earth_fix.dat and earth_nav.dat found in the "X-Plane/Resource/default data/" directory.<br>
-            The earth_fix.dat just contains all FIX points, the earth_nav.dat on the other hand contains all navaids like NDB, VOR, ILS, LOC, glideslope and marker beacons.
+            The earth_fix.dat just contains all FIX points, the earth_nav.dat on the other hand contains all Nav-aids like NDB, VOR, ILS, LOC, glideslope and marker beacons.
             <br>
             <br>
             <h4>Quick Installation Guide</h4>
@@ -32,26 +32,17 @@
         <p>&nbsp;</p>
         <p>&nbsp;</p>
 
-<!--            <div class="download-instructions">
-                <ul>
-                    <li>mark the whole list (strg-a) in the text area to the right</li>
-                    <li>copy (strg-c)</li>
-                    <li>open the Resources/default data/earth_fix.dat file that you find in your main X-Plane folder with your preferred text editor</li>
-                    <li>scroll down and paste the copied list above the last row "99"</li>
-                    <li>save the earth_fix.dat and you are done.</li>
-                </ul>
-            </div>
--->
         <div class="pull-left">
             <div class="full-width-left"><center>earth_fix.dat</center><br></div>
         <textarea class="download-box pull-left"><% @fix.each do |f| %>
- <%= number_with_precision(f.lat, precision: 6) %>&#32;&#32;<%= number_with_precision(f.lon, precision: 6) %>&#32;&#32;<%= f.name %><% end %></textarea>
+&#32;<% if f.lat >= 0 %>&#32;<% end %><% if f.lat > -10 and f.lat < 10 %>&#32;<% end %><%= number_with_precision(f.lat, precision: 8) %>&#32;<% if f.lon >= 0 %>&#32;<% end %><% if f.lon > -10 and f.lon < 10 %>&#32;<% end %><% if f.lon > -100 and f.lon < 100  %>&#32;<% end %><%= number_with_precision(f.lon, precision: 8) %>&#32;&#32;<%= f.name %><% end %></textarea>
         </div>
 
         <div class="pull-right">
             <div class="full-width-left"><center>earth_nav.dat</center><br></div>
         <textarea class="download-box pull-rigth"><% @ndb.each do |n| %>
- 2&#32;&#32;<%= number_with_precision(n.lat, precision: 6) %>&#32;&#32;<%= number_with_precision(n.lon, precision: 6) %>&#32;&#32;<%= n.elevation %>&#32;&#32;<%= n.frq %>&#32;&#32;<%= n.range %>&#32;&#32;0.0&#32;&#32;<%= n.identifier %>&#32;&#32;<%= n.name %><% end %></textarea>
+ 2&#32;<% if n.lat >= 0 %>&#32;<% end %><% if n.lat > -10 and n.lat < 10 %>&#32;<% end %><%= number_with_precision(n.lat, precision: 8) %>&#32;<% if n.lon >= 0 %>&#32;<% end %><% if n.lon > -10 and n.lon < 10 %>&#32;<% end %><% if n.lon > -100 and n.lon < 100  %>&#32;<% end %><%= number_with_precision(n.lon, precision: 8) %>&#32;&#32;<%= n.elevation %>&#32;&#32;<%= n.frq %>&#32;&#32;<%= n.range %>&#32;&#32;0.0&#32;&#32;<%= n.identifier %>&#32;&#32;<%= n.name %><% end %><% @vor.each do |v| %>
+ 3&#32;<% if v.lat >= 0 %>&#32;<% end %><% if v.lat > -10 and v.lat < 10 %>&#32;<% end %><%= number_with_precision(v.lat, precision: 8) %>&#32;<% if v.lon >= 0 %>&#32;<% end %><% if v.lon > -10 and v.lon < 10 %>&#32;<% end %><% if v.lon > -100 and v.lon < 100  %>&#32;<% end %><%= number_with_precision(v.lon, precision: 8) %>&#32;&#32;<%= v.elevation %>&#32;&#32;<%= v.frq %>&#32;&#32;<%= v.range %>&#32;&#32;<%= number_with_precision(v.slaved, precision: 3) %>&#32;&#32;<%= v.identifier %>&#32;&#32;<%= v.name %><% end %></textarea>
         </div>
 
 

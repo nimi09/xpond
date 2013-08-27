@@ -3,6 +3,7 @@ Xpond::Application.routes.draw do
   resources :users
   resources :fixes
   resources :ndbs
+  resources :vors
 
   root to: 'static_pages#home'
 

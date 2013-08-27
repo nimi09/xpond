@@ -60,7 +60,7 @@ class UsersController < ApplicationController
         def signed_in_user
             unless signed_in?
                 store_location
-                redirect_to login_url, notice: "Please login in first."
+                redirect_to login_url, notice: "Please log in first."
             end
         end
 

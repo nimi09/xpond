@@ -9,7 +9,7 @@
                 <% @users.each do |user| %>
                     <li>
                         <%= link_to user.name, user%>
-                        <%= user.fixes.count %>
+                        <%= user.fixes.count + user.ndbs.count + user.vors.count %>
                         <%= "contribution".pluralize(user.fixes.count) %>
                         <% if current_user.admin? && !current_user?(user) %>
                             | <%= user.email %>

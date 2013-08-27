@@ -36,6 +36,15 @@
             </ul>
         </div>
         <div class="footer-menu-block">
+            <h4>VOR</h4>
+            <ul>
+                <li><%= link_to 'Add new VOR', new_vor_path %></li>
+                <% if signed_in? %>
+                    <li><%= link_to 'VOR - list', vors_path %></li>
+                <% end %>
+            </ul>
+        </div>
+        <div class="footer-menu-block">
             <h4>LINKS</h4>
             <ul>
                 <li><%= link_to 'X-Plane official', 'http://www.x-plane.com', :target => "_blank" %></li>

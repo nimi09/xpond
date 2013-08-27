@@ -1,0 +1,15 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Edit VOR</h1>
+        <div class="welcom-text-box">
+            <div>
+                <%= render 'shared/flash_messages', flash: flash %>
+                <%= form_for @vor, html:{ id: "vor_form" }  do |f| %>
+                    <%= render 'vor_fields', f: f %>
+                    <%= f.submit "Update", class: "newfix-submit-btn edit-btn-width", tabindex: "5" %>
+                    <%= link_to "Cancle", vors_path, class: "newfix-submit-btn edit-btn-width", tabindex: "21" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

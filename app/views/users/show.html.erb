@@ -7,9 +7,17 @@
         <% end %> 
         <div class="user-signup-box">
             <center>
-                <h1 class="h1-no-margin"><%= @user.fixes.count %></h1>
-                contributed FIX <%= "point".pluralize(@user.fixes.count) %>
-
+                <div class="count-box">
+                    <h3>added <%= "FIX".pluralize(@user.fixes.count) %>:</h3><h1 class="h1-glow h1-no-margin"><%= @user.fixes.count %></h1>
+                </div>
+                <div class="count-box">
+                    <h3>added <%= "NDB".pluralize(@user.ndbs.count) %>:</h3><h1 class="h1-glow h1-no-margin"><%= @user.ndbs.count %></h1>
+                </div>
+                <div class="count-box">
+                    <h3>added <%= "VOR".pluralize(@user.vors.count) %>:</h3><h1 class="h1-glow h1-no-margin"><%= @user.vors.count %></h1>
+                </div>
+                <br>
+                <br>
             </center>
         </div>
     </div>

@@ -51,7 +51,7 @@ class NdbsController < ApplicationController
                 render 'edit'
             end
         else
-            redirect_to login_url, notice: "Please login in first."
+            redirect_to login_url, notice: "Please login first."
         end
     end
 

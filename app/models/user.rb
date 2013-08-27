@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :fixes
   has_many :ndbs
+  has_many :vors
 
 # names will be unique with    case_sensetive
 # email will be unique without case_sensetive

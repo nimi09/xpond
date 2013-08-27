@@ -1,0 +1,13 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Add new VOR</h1>
+        <div>
+            <%= render 'shared/flash_messages', flash: flash %>
+            <%= form_for @vor, html:{ id: "vor_form" }  do |f| %>
+                <%= render 'vor_fields', f: f %>
+                <%= f.submit "Add VOR", class: "newfix-submit-btn new-btn-width", tabindex: "4" %>
+            <% end %>
+        </div>
+
+    </div>
+</div>
