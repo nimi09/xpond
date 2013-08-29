@@ -34,7 +34,7 @@
                                         <li class="mute pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
                                     <% else %>
                                         <li><%= f.user.name if current_user == f.user %></li>
-                                        <li class="pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
+                                        <li class="mute pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
                                     <% end %>
                                 <% end %>
                             </ul>

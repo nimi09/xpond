@@ -20,8 +20,8 @@ class Fix < ActiveRecord::Base
     validates :lat, presence: true, numericality: { greater_than_or_equal_to:  -90, less_than_or_equal_to:   90 }
     validates :lon, presence: true, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to:  180 }
 
-    NAME_REGEX = /[a-zA-Z\d]{5}/
-    validates :name, presence: true, format: { with: NAME_REGEX }, length: {is: 5}, uniqueness: { case_sensitive: false }
+    NAME_REGEX = /[a-zA-Z\d]/
+    validates :name, presence: true, format: { with: NAME_REGEX }, length: {in: 3..5}, uniqueness: { case_sensitive: false }
 
 #    default_scope order: 'fixes.created_at DESC'
 
