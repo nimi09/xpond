@@ -17,12 +17,10 @@
 
     function calc_lat() {
         ndb_form.ndb_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
-        latsign=1;    
     }
 
     function calc_lon() {
         ndb_form.ndb_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
-        lonsign=1;
     }
 </script>
 
@@ -81,7 +79,8 @@
             <div class="newfix-form-convert-line">
                 <div class="newfix-line-seg">
                     <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMlat" placeholder="deg" name="DMdlat"  tabindex="5" onblur="
-                                        if(ndb_form.DMdlat.value &lt; 0)  { DMlatsign = -1; }
+                                        var s = ndb_form.DMdlat.value.toString();
+                                        if(ndb_form.DMdlat.value &lt; 0 || s.indexOf('-') != -1 )  { DMlatsign = -1; } else { DMlatsign = 1; }
                                         DMabsdlat = Math.abs( Math.round(ndb_form.DMdlat.value * 1000000.));
                                         //Math.round is used to eliminate the small error caused by rounding in the computer:
                                         //e.g. 0.2 is not the same as 0.20000000000284
@@ -95,13 +94,11 @@
                                         //Error checks
                                         if(DMabsmlat &gt;= (60 * 1000000)) {  alert(' Minutes Latitude must be in the range of 0 to 59. ');   ndb_form.DMmlat.value=''; }
                                         else {
-                                            ndb_form.ndb_lat.value = Math.round(DMabsdlat + (DMabsmlat/60.) ) * DMlatsign/1000000;
-                                        DMlatsign=1; }">
+                                            ndb_form.ndb_lat.value = Math.round(DMabsdlat + (DMabsmlat/60.) ) * DMlatsign/1000000; }">
                 </div>
                 <div class="newfix-line-seg">
                     <input type="button" class="newfix-convert-btn" value="convert" tabindex="7" onclick="
-                                        ndb_form.ndb_lat.value = Math.round(DMabsdlat + (DMabsmlat/60.) ) * DMlatsign/1000000;
-                                        DMlatsign=1;">
+                                        ndb_form.ndb_lat.value = Math.round(DMabsdlat + (DMabsmlat/60.) ) * DMlatsign/1000000;">
                 </div>
             </div>
         </li>
@@ -110,7 +107,8 @@
             <div class="newfix-form-convert-line">
                 <div class="newfix-line-seg">
                     <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMlon" name="DMdlon" placeholder="deg"  tabindex="8" onblur="
-                        if(ndb_form.DMdlon.value &lt; 0)  { DMlonsign = -1; }
+                        var s = ndb_form.DMdlon.value.toString();
+                        if(ndb_form.DMdlon.value &lt; 0 || s.indexOf('-') != -1 )  { DMlonsign = -1; } else { DMlonsign = 1; }
                         DMabsdlon = Math.abs( Math.round(ndb_form.DMdlon.value * 1000000.));
                         //Math.round is used to eliminate the small error caused by rounding in the computer:
                         //e.g. 0.2 is not the same as 0.20000000000284
@@ -124,13 +122,11 @@
                         //Error checks
                         if(DMabsmlon &gt;= (60 * 1000000))   {  alert(' Minutes Longitude must be in the range of 0 to 59. ');   ndb_form.DMmlon.value=''; }
                         else {
-                            ndb_form.ndb_lon.value = Math.round(DMabsdlon + (DMabsmlon/60) ) * DMlonsign/1000000;
-                        DMlonsign=1; }">
+                            ndb_form.ndb_lon.value = Math.round(DMabsdlon + (DMabsmlon/60) ) * DMlonsign/1000000; }">
                 </div>
                 <div class="newfix-line-seg">
                     <input type="BUTTON" value="convert" class="newfix-convert-btn"  tabindex="10" onclick="
-                        ndb_form.ndb_lon.value = Math.round(DMabsdlon + (DMabsmlon/60) ) * DMlonsign/1000000;
-                        DMlonsign=1;">
+                        ndb_form.ndb_lon.value = Math.round(DMabsdlon + (DMabsmlon/60) ) * DMlonsign/1000000;">
                 </div>
             </div>
         </li>
@@ -145,7 +141,8 @@
             <div class="newfix-form-convert-line">
                 <div class="newfix-line-seg">
                     <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMSlat" placeholder="deg" name="dlat"  tabindex="11" onblur="
-                                        if(ndb_form.dlat.value &lt; 0)  { latsign = -1; }
+                                        var s = ndb_form.dlat.value.toString();
+                                        if(ndb_form.dlat.value &lt; 0 || s.indexOf('-') != -1 )  { latsign = -1; } else { latsign = 1; }
                                         absdlat = Math.abs( Math.round(ndb_form.dlat.value * 1000000.));
                                         //Math.round is used to eliminate the small error caused by rounding in the computer:
                                         //e.g. 0.2 is not the same as 0.20000000000284
@@ -167,8 +164,7 @@
                 </div>
                 <div class="newfix-line-seg">
                     <input type="button" class="newfix-convert-btn" value="convert" tabindex="14" onclick="
-                                        ndb_form.ndb_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
-                                        latsign=1;">
+                                        ndb_form.ndb_lat.value = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;">
                 </div>
             </div>
         </li>
@@ -177,7 +173,8 @@
             <div class="newfix-form-convert-line">
                 <div class="newfix-line-seg">
                     <input type="INT" class="newfix-input input-deg" maxlength="4" id="DMSlon" name="dlon" placeholder="deg"  tabindex="15" onblur="
-                        if(ndb_form.dlon.value &lt; 0)  { lonsign = -1; }
+                        var s = ndb_form.dlon.value.toString();
+                        if(ndb_form.dlon.value &lt; 0 || s.indexOf('-') != -1 )  { lonsign = -1; } else { lonsign = 1; }
                         absdlon = Math.abs( Math.round(ndb_form.dlon.value * 1000000.));
                         //Math.round is used to eliminate the small error caused by rounding in the computer:
                         //e.g. 0.2 is not the same as 0.20000000000284
@@ -201,8 +198,7 @@
                 </div>
                 <div class="newfix-line-seg">
                     <input type="BUTTON" value="convert" class="newfix-convert-btn"  tabindex="18" onclick="
-                        ndb_form.ndb_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;
-                        lonsign=1;">
+                        ndb_form.ndb_lon.value = Math.round(absdlon + (absmlon/60) + (absslon/3600) ) * lonsign/1000000;">
                 </div>
             </div>
         </li>
