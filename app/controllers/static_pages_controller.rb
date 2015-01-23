@@ -25,7 +25,10 @@ class StaticPagesController < ApplicationController
         def admin_user
 #            @fixes = Fix.order('updated_at DESC').all
             @fixes = Fix.paginate(page: params[:page], :per_page => 30).order("updated_at DESC")
+
+#            @fixes = Fix.paginate(page: params[:page], :per_page => 30)
+
             redirect_to(root_path) unless current_user.admin?
-            redirect_to(fixes_path) if @fix.nil?
+            redirect_to(root_path) if @fixes.nil?
         end
 end
