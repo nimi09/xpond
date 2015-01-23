@@ -15,6 +15,7 @@
                             <li class="sfl-latlon">Lat</li>
                             <li class="sfl-latlon">Lon</li>
                             <li class="sfl-ndb-name">User</li>
+                            <li class="sfl-updated-at">updated at</li>
                         </ul>
                     </div>
                 </li>
@@ -29,6 +30,7 @@
                                     <% if current_user.admin? %>
                                         <li><%= f.user.name if f.user %></li>
                                         <li><%= f.user.email if f.user %></li>
+                                        <li><%= f.updated_at %></li>
                                         <li class="mute pull-right"><%= link_to "delete", f, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete the FIX point:\n\n" + f.name } %></li>
                                         <li class="mute pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
                                     <% else %>
