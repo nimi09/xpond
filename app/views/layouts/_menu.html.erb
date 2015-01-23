@@ -26,6 +26,10 @@
                         <li><%= link_to "All users", users_path %></li>
                         <li><%= link_to "Settings", edit_user_path(current_user) %></li>
                         <li class="dr-divider"></li>
+                        <% if current_user.admin? %>
+                            <li><%= link_to "Newest Fixes", newestfixes_path %></li>
+                            <li class="dr-divider"></li>
+                        <% end %> 
                         <li><%= link_to "logout", logout_path, method: "delete" %></li>
                     </ul>
                 </li>

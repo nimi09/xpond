@@ -1,0 +1,51 @@
+<div class="std-block">
+    <div class="container">
+        <h1>Showing newest FIX points</h1>
+        <%= render 'shared/flash_messages', flash: flash %>
+
+        <div class="fullwidth-list-box align-center">
+
+            <%= will_paginate %>
+
+            <ul class="showfix-line">
+                <li>
+                    <div>
+                        <ul>
+                            <li class="sfl-name">Ident.</li>
+                            <li class="sfl-latlon">Lat</li>
+                            <li class="sfl-latlon">Lon</li>
+                            <li class="sfl-ndb-name">User</li>
+                        </ul>
+                    </div>
+                </li>
+                <% @fixes.each do |f| %>
+                    <li>
+                        <div class="highlight">
+                            <ul>
+                                <li class="sfl-name"><%= f.name %></li>
+                                <li class="sfl-latlon"><%= number_with_precision(f.lat, precision: 8) %></li>
+                                <li class="sfl-latlon"><%= number_with_precision(f.lon, precision: 8) %></li>
+                                <% if signed_in? %>
+                                    <% if current_user.admin? %>
+                                        <li><%= f.user.name if f.user %></li>
+                                        <li><%= f.user.email if f.user %></li>
+                                        <li class="mute pull-right"><%= link_to "delete", f, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete the FIX point:\n\n" + f.name } %></li>
+                                        <li class="mute pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
+                                    <% else %>
+                                        <li><%= f.user.name if current_user == f.user %></li>
+                                        <li class="mute pull-right"><%= link_to "Edit", edit_fix_path(f) %></li>
+                                    <% end %>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </li>
+                <% end %>
+            </ul>
+
+            <div class="pagination"><%= will_paginate %></div> 
+
+        </div>  
+
+
+	</div>
+</div>
