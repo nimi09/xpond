@@ -15,6 +15,7 @@ Xpond::Application.routes.draw do
   match '/map',      to: 'static_pages#map'
   match '/download', to: 'static_pages#download'
   match '/newestfixes', to: 'static_pages#newest_fixes'
+  match '/totalrows', to: 'static_pages#totalrows'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -20,6 +20,12 @@ class StaticPagesController < ApplicationController
     def newest_fixes
     end
 
+    def totalrows
+        st=0; ActiveRecord::Base.send(:subclasses).each {|sc| begin; st += sc.all.size unless sc.all.nil?; rescue ActiveRecord::StatementInvalid; end; };
+        @trows = st.to_s;
+#        puts "Total number of rows is #{st.to_s}"
+    end
+
     private
 
         def admin_user

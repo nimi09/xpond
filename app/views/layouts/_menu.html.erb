@@ -28,6 +28,7 @@
                         <li class="dr-divider"></li>
                         <% if current_user.admin? %>
                             <li><%= link_to "Newest Fixes", newestfixes_path %></li>
+                            <li><%= link_to "Total Rows", totalrows_path %></li>
                             <li class="dr-divider"></li>
                         <% end %> 
                         <li><%= link_to "logout", logout_path, method: "delete" %></li>
