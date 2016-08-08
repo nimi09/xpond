@@ -997,6 +997,19 @@ h4 {
     background-color:  rgba(255,128,255,.05);
 }
 
+.path {
+    display: inline-block;
+    margin: 0;
+    padding: .15em .4em;
+
+    color: #eee;
+    background-color: rgba(0,0,0,.5);
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
 /* USER Stuff */
 
 .user-signup-box {
