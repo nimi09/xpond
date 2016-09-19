@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 
     before_filter :admin_user, only: [:newest_fixes]
+    before_filter :redirect_unless_admin, only: [:adminmap]
 
     def home
         @fix_count = Fix.count
@@ -15,6 +16,10 @@ class StaticPagesController < ApplicationController
     end
 
     def map
+    end
+
+    def adminmap
+        @count = params[:count]
     end
 
     def newest_fixes
@@ -36,5 +41,9 @@ class StaticPagesController < ApplicationController
 
             redirect_to(root_path) unless current_user.admin?
             redirect_to(root_path) if @fixes.nil?
+        end
+
+        def redirect_unless_admin
+            redirect_to(root_path) unless current_user.admin?
         end
 end

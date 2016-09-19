@@ -1,0 +1,242 @@
+    <script src="http://www.google.com/jsapi"></script>
+    <script type='text/javascript' src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'></script>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script type="text/javascript">
+        google.load('maps', '3', {
+            other_params: 'sensor=false'
+        });
+
+        // Onload handler to fire off the app.
+        google.setOnLoadCallback(initialize);
+
+        var map = null;
+        var markerClusterer = null;
+        var jsonglobal;
+        var bounds;
+
+        function refreshMap() {
+            if (markerClusterer) {
+                markerClusterer.clearMarkers();
+            }
+
+            var markers = [];
+            var fixMarker = new google.maps.MarkerImage('../assets/fix-marker.png',
+                new google.maps.Size(25, 25),
+                new google.maps.Point(0,0),
+                new google.maps.Point(12, 12)
+            );
+/*          var markercluster_style = [{url: 'static/markercluster-white.png',
+                                        height: 100,
+                                        width: 53,
+                                        textColor: '#222',
+                                        fontWeight: '800',
+                                        textSize: 11},
+                                        {url: 'static/markercluster-white.png',
+                                        height: 100,
+                                        width: 53,
+                                        textColor: '#222',
+                                        fontWeight: '800',
+                                        textSize: 11},
+                                        {url: 'static/markercluster-white.png',
+                                        height: 100,
+                                        width: 53,
+                                        textColor: '#222',
+                                        fontWeight: '800',
+                                        textSize: 11}];  */
+                   
+            for (var i = 0, length = jsonglobal.length; i < length; i++) {
+                var data = jsonglobal[i],
+                    data_latLng = new google.maps.LatLng(data.lat, data.lon);
+
+                bounds.extend(data_latLng);
+
+                var marker = new google.maps.Marker({
+                    position: data_latLng,
+                    title: data.name,
+                    map: map,
+                    draggable: false,
+                    icon: fixMarker
+                });
+
+//                markers.push(marker);
+
+                var infoWindow = new google.maps.InfoWindow();
+/*                google.maps.event.addListener(marker, "click", function(e) {
+                    var iwstr = '';
+                    infoWindow.setContent(iwstr);
+                    infoWindow.open(map, marker);
+                });
+*/
+                (function(marker, data) {
+                    // Attaching a click event to the current marker
+                    google.maps.event.addListener(marker, "click", function(e) {
+                        var iwstr = '<h3 style="color: #222;">' + data.name + '</h3>';
+                        iwstr = iwstr + '<span style="color:#222">' + data.lat + ', ' + data.lon + '</span>';
+                        infoWindow.setOptions( {
+                            content: iwstr,
+                            pixelOffset: new google.maps.Size(0,12)
+                        });
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, data);
+            }
+
+            map.fitBounds(bounds);
+
+
+/*
+            markerClusterer = new MarkerClusterer(map, markers, {
+                maxZoom: 15,
+                gridSize: 50,
+                styles: markercluster_style
+            }); */
+
+        }
+
+        function initialize() {
+
+            var latLng = new google.maps.LatLng(49.675, 10.101);
+            
+            bounds = new google.maps.LatLngBounds();
+
+            map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                zoom: 5,
+                center: latLng,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.LARGE
+                },
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+             });
+
+            // Load jason and place Marker
+            $.ajax({
+                url: "/latestfixes/<%= @count %>.json",
+                dataType: "json",
+                async: false,
+                success: function(json){
+                    jsonglobal = json;
+                }
+            }); 
+
+            refreshMap();
+//            load_vor();
+//            load_ndb();
+
+        }
+
+        function load_vor() {
+            var json_vor;
+            var vorMarker = new google.maps.MarkerImage('../assets/vor-marker.png',
+                new google.maps.Size(25,25),
+                new google.maps.Point(0,0),
+                new google.maps.Point(12,12)
+            );
+
+            $.ajax({
+                url: "/vors.json",
+                dataType: "json",
+                async: false,
+                success: function(json){
+                    json_vor = json;
+                }
+            });
+
+            for (var i = 0, length = json_vor.length; i < length; i++) {
+                var vor_data = json_vor[i],
+                    vor_data_latLng = new google.maps.LatLng(vor_data.lat, vor_data.lon);
+
+                bounds.extend(vor_data_latLng);
+
+                var vor_marker = new google.maps.Marker({
+                    position: vor_data_latLng,
+                    title: vor_data.identifier,
+                    map: map,
+                    draggable: false,
+                    icon: vorMarker
+                });
+
+                var vor_infoWindow = new google.maps.InfoWindow();
+
+                (function(vor_marker, vor_data) {
+                    // Attaching a click event to the current marker
+                    google.maps.event.addListener(vor_marker, "click", function(e) {
+                        var iwstr = '<h3 style="color: #222;">' + vor_data.identifier + '</h3>';
+                        iwstr = iwstr + '<span style="color:#222">' + vor_data.lat + ', ' + vor_data.lon + '</span>';
+                        vor_infoWindow.setOptions( {
+                            content: iwstr,
+                            pixelOffset: new google.maps.Size(0,12)
+                        });
+                        vor_infoWindow.open(map, vor_marker);
+                    });
+                })(vor_marker, vor_data);
+            }
+
+            map.fitBounds(bounds);
+
+        }
+
+        function load_ndb() {
+            var json_ndb;
+            var ndbMarker = new google.maps.MarkerImage('../assets/ndb-marker.png',
+                new google.maps.Size(25,25),
+                new google.maps.Point(0,0),
+                new google.maps.Point(12,12)
+            );
+
+            $.ajax({
+                url: "/ndbs.json",
+                dataType: "json",
+                async: false,
+                success: function(json){
+                    json_ndb = json;
+                }
+            });
+
+            for (var i = 0, length = json_ndb.length; i < length; i++) {
+                var ndb_data = json_ndb[i],
+                    ndb_data_latLng = new google.maps.LatLng(ndb_data.lat, ndb_data.lon);
+
+                bounds.extend(ndb_data_latLng);
+
+                var ndb_marker = new google.maps.Marker({
+                    position: ndb_data_latLng,
+                    title: ndb_data.identifier,
+                    map: map,
+                    draggable: false,
+                    icon: ndbMarker
+                });
+
+                var ndb_infoWindow = new google.maps.InfoWindow();
+
+                (function(ndb_marker, ndb_data) {
+                    // Attaching a click event to the current marker
+                    google.maps.event.addListener(ndb_marker, "click", function(e) {
+                        var iwstr = '<h3 style="color: #222;">' + ndb_data.identifier + '</h3>';
+                        iwstr = iwstr + '<span style="color:#222">' + ndb_data.lat + ', ' + ndb_data.lon + '</span>';
+                        ndb_infoWindow.setOptions( {
+                            content: iwstr,
+                            pixelOffset: new google.maps.Size(0,12)
+                        });
+                        ndb_infoWindow.open(map, ndb_marker);
+                    });
+                })(ndb_marker, ndb_data);
+            }
+
+            map.fitBounds(bounds);
+
+        }
+
+    </script>
+
+<div class="std-block">
+    <div class="container">
+        <h1>Displays the last <%= @count %> fixes.</h1>
+        <div class="map-box">
+            <div id="mapCanvas" style="display: block; margin: 0; padding: 0; width: 100%; height: 500px;">
+            </div>
+        </div>
+    </div>
+</div>

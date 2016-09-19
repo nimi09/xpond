@@ -1,4 +1,6 @@
 Xpond::Application.routes.draw do
+  match "/latestfixes/:count", to: 'latest_fixes#index'
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
   resources :fixes
@@ -13,6 +15,7 @@ Xpond::Application.routes.draw do
 
   match '/newfix',   to: 'fixes#new'
   match '/map',      to: 'static_pages#map'
+  match '/map/:count', to: 'static_pages#adminmap'
   match '/download', to: 'static_pages#download'
   match '/newestfixes', to: 'static_pages#newest_fixes'
   match '/totalrows', to: 'static_pages#totalrows'
