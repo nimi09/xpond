@@ -10,8 +10,15 @@
                         <tr>
                             <td>username</td>
                             <td>contributions</td>
-                            <td></td>
-                            <td></td>
+                            <% if current_user.admin? %>
+                                <td>email</td>
+                                <td>member since</td>
+                                <td>action</td>
+                            <% else %>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            <% end %>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,9 +28,11 @@
                                 <td><%= user.fixes.count + user.ndbs.count + user.vors.count %></td>
                                 <% if current_user.admin? && !current_user?(user) %>
                                     <td><%= user.email %></td>
+                                    <td><%= time_ago_in_words(user.created_at) %></td>
                                     <td><%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete user:\n\n" + user.name } %>
                                     </td>                            
                                 <% else %>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 <% end %>
