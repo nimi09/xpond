@@ -4,20 +4,33 @@
         <%= render 'shared/flash_messages', flash: flash %>
         <div class="align-center">
             <%= will_paginate %>
-            <div class="user-signup-box align-left">
-            <ul>
-                <% @users.each do |user| %>
-                    <li>
-                        <%= link_to user.name, user%>
-                        <%= user.fixes.count + user.ndbs.count + user.vors.count %>
-                        <%= "contribution".pluralize(user.fixes.count) %>
-                        <% if current_user.admin? && !current_user?(user) %>
-                            | <%= user.email %>
-                            | <%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete user:\n\n" + user.name } %>
+            <div class="users--box align-left">
+                <table class="users--table">
+                    <thead class="users--table-header">
+                        <tr>
+                            <td>username</td>
+                            <td>contributions</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @users.each do |user| %>
+                            <tr>
+                                <td><%= link_to user.name, user%></td>
+                                <td><%= user.fixes.count + user.ndbs.count + user.vors.count %></td>
+                                <% if current_user.admin? && !current_user?(user) %>
+                                    <td><%= user.email %></td>
+                                    <td><%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete user:\n\n" + user.name } %>
+                                    </td>                            
+                                <% else %>
+                                    <td></td>
+                                    <td></td>
+                                <% end %>
+                            </tr>
                         <% end %>
-                    </li>
-                <% end %>
-            </ul>
+                    </tbody>
+                </table>
             </div>
             <%= will_paginate %>
         </div>
