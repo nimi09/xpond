@@ -72,13 +72,13 @@
                     position: data_latLng,
                     title: data.name,
                     map: map,
-                    label: {
-                        text: data.name,
+                    // label: {
+                    //     text: data.name,
                         // fontWeight: 'bold',
                         // fontSize: '12px',
                         // fontFamily: '"Courier New", Courier,Monospace',
-                        color: '#fff8'                        
-                    },
+                    //     color: '#fff8'                        
+                    // },
                     draggable: false,
                     icon: fixMarkerWithLabelPosition
                 });
@@ -150,31 +150,31 @@
             vorMarkers = load_vor();
             ndbMarkers = load_ndb();
 
-            google.maps.event.addListener(map, "zoom_changed", function(e) {
-                var newMarkerColor = '#fff0';
-                if (map.getZoom() >= 10) {
-                    newMarkerColor = '#fffa';
-                }
+            // google.maps.event.addListener(map, "zoom_changed", function(e) {
+            //     var newMarkerColor = '#fff0';
+            //     if (map.getZoom() >= 10) {
+            //         newMarkerColor = '#fffa';
+            //     }
 
-                fixMarkers.forEach( m => {
-                    var label = m.getLabel();
-                    label.color = newMarkerColor;
-                    m.setLabel(label);
-                });
+            //     fixMarkers.forEach( m => {
+            //         var label = m.getLabel();
+            //         label.color = newMarkerColor;
+            //         m.setLabel(label);
+            //     });
 
-                vorMarkers.forEach( m => {
-                    var label = m.getLabel();
-                    label.color = newMarkerColor;
-                    m.setLabel(label);
-                });
+            //     vorMarkers.forEach( m => {
+            //         var label = m.getLabel();
+            //         label.color = newMarkerColor;
+            //         m.setLabel(label);
+            //     });
 
-                ndbMarkers.forEach( m => {
-                    var label = m.getLabel();
-                    label.color = newMarkerColor;
-                    m.setLabel(label);
-                });
+            //     ndbMarkers.forEach( m => {
+            //         var label = m.getLabel();
+            //         label.color = newMarkerColor;
+            //         m.setLabel(label);
+            //     });
                 
-            });
+            // });
 
         }
 
@@ -215,13 +215,13 @@
                     position: vor_data_latLng,
                     title: vor_data.identifier,
                     map: map,
-                    label: {
-                        text: vor_data.identifier,
+                    // label: {
+                    //     text: vor_data.identifier,
                         // fontWeight: 'bold',
                         // fontSize: '12px',
                         // fontFamily: '"Courier New", Courier,Monospace',
-                        color: '#fff8'                        
-                    },
+                    //     color: '#fff8'                        
+                    // },
                     draggable: false,
                     icon: vorMarkerWithLabelPosition
                 });
@@ -286,13 +286,13 @@
                     position: ndb_data_latLng,
                     title: ndb_data.identifier,
                     map: map,
-                    label: {
-                        text: ndb_data.identifier,
+                    // label: {
+                    //     text: ndb_data.identifier,
                         // fontWeight: 'bold',
                         // fontSize: '12px',
                         // fontFamily: '"Courier New", Courier,Monospace',
-                        color: '#fff8'                        
-                    },                    
+                    //     color: '#fff8'                        
+                    // },                    
                     draggable: false,
                     icon: ndbMarkerWithLabelPosition
                 });
