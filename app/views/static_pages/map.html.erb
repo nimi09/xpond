@@ -16,6 +16,10 @@
         var jsonglobal;
         var bounds;
 
+        var fixMarkers = [];
+        var vorMarkers = [];
+        var ndbMarkers = [];
+
         function refreshMap() {
             if (markerClusterer) {
                 markerClusterer.clearMarkers();
@@ -25,8 +29,20 @@
             var fixMarker = new google.maps.MarkerImage('assets/fix-marker.png',
                 new google.maps.Size(25, 25),
                 new google.maps.Point(0,0),
-                new google.maps.Point(12, 12)
+                new google.maps.Point(12, 12),
             );
+
+            var fixMarkerWithLabelPosition = {
+                url: 'assets/fix-marker.png',
+                // This marker is 20 pixels wide by 32 pixels high.
+                size: new google.maps.Size(25, 25),
+                // The origin for this image is (0, 0).
+                origin: new google.maps.Point(0, 0),
+                // The anchor for this image is the base of the flagpole at (0, 32).
+                anchor: new google.maps.Point(12, 12),
+                labelOrigin: new google.maps.Point(44, 13)
+            };
+
 /*          var markercluster_style = [{url: 'static/markercluster-white.png',
                                         height: 100,
                                         width: 53,
@@ -56,11 +72,18 @@
                     position: data_latLng,
                     title: data.name,
                     map: map,
+                    label: {
+                        text: data.name,
+                        // fontWeight: 'bold',
+                        // fontSize: '12px',
+                        // fontFamily: '"Courier New", Courier,Monospace',
+                        color: '#fff8'                        
+                    },
                     draggable: false,
-                    icon: fixMarker
+                    icon: fixMarkerWithLabelPosition
                 });
 
-//                markers.push(marker);
+               markers.push(marker);
 
                 var infoWindow = new google.maps.InfoWindow();
 /*                google.maps.event.addListener(marker, "click", function(e) {
@@ -93,6 +116,8 @@
                 styles: markercluster_style
             }); */
 
+            return markers;
+
         }
 
         function initialize() {
@@ -121,19 +146,55 @@
                 }
             }); 
 
-            refreshMap();
-            load_vor();
-            load_ndb();
+            fixMarkers = refreshMap();
+            vorMarkers = load_vor();
+            ndbMarkers = load_ndb();
+
+            google.maps.event.addListener(map, "zoom_changed", function(e) {
+                var newMarkerColor = '#fff0';
+                if (map.getZoom() >= 10) {
+                    newMarkerColor = '#fffa';
+                }
+
+                fixMarkers.forEach( m => {
+                    var label = m.getLabel();
+                    label.color = newMarkerColor;
+                    m.setLabel(label);
+                });
+
+                vorMarkers.forEach( m => {
+                    var label = m.getLabel();
+                    label.color = newMarkerColor;
+                    m.setLabel(label);
+                });
+
+                ndbMarkers.forEach( m => {
+                    var label = m.getLabel();
+                    label.color = newMarkerColor;
+                    m.setLabel(label);
+                });
+                
+            });
 
         }
 
         function load_vor() {
             var json_vor;
+            var markers = [];
+
             var vorMarker = new google.maps.MarkerImage('assets/vor-marker.png',
                 new google.maps.Size(25,25),
                 new google.maps.Point(0,0),
                 new google.maps.Point(12,12)
             );
+
+            var vorMarkerWithLabelPosition = {
+                url: 'assets/vor-marker.png',
+                size: new google.maps.Size(25, 25),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(12, 12),
+                labelOrigin: new google.maps.Point(47, 13)
+            };
 
             $.ajax({
                 url: "/vors.json",
@@ -154,9 +215,18 @@
                     position: vor_data_latLng,
                     title: vor_data.identifier,
                     map: map,
+                    label: {
+                        text: vor_data.identifier,
+                        // fontWeight: 'bold',
+                        // fontSize: '12px',
+                        // fontFamily: '"Courier New", Courier,Monospace',
+                        color: '#fff8'                        
+                    },
                     draggable: false,
-                    icon: vorMarker
+                    icon: vorMarkerWithLabelPosition
                 });
+
+                markers.push(vor_marker);
 
                 var vor_infoWindow = new google.maps.InfoWindow();
 
@@ -175,16 +245,27 @@
             }
 
             map.fitBounds(bounds);
+            return markers;
 
         }
 
         function load_ndb() {
             var json_ndb;
+            var markers = [];
+
             var ndbMarker = new google.maps.MarkerImage('assets/ndb-marker.png',
                 new google.maps.Size(25,25),
                 new google.maps.Point(0,0),
                 new google.maps.Point(12,12)
             );
+
+            var ndbMarkerWithLabelPosition = {
+                url: 'assets/ndb-marker.png',
+                size: new google.maps.Size(25, 25),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(12, 12),
+                labelOrigin: new google.maps.Point(47, 13)
+            };
 
             $.ajax({
                 url: "/ndbs.json",
@@ -205,9 +286,18 @@
                     position: ndb_data_latLng,
                     title: ndb_data.identifier,
                     map: map,
+                    label: {
+                        text: ndb_data.identifier,
+                        // fontWeight: 'bold',
+                        // fontSize: '12px',
+                        // fontFamily: '"Courier New", Courier,Monospace',
+                        color: '#fff8'                        
+                    },                    
                     draggable: false,
-                    icon: ndbMarker
+                    icon: ndbMarkerWithLabelPosition
                 });
+
+                markers.push(ndb_marker);
 
                 var ndb_infoWindow = new google.maps.InfoWindow();
 
@@ -226,6 +316,7 @@
             }
 
             map.fitBounds(bounds);
+            return markers;
 
         }
 
