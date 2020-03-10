@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 # ruby '1.9.3' # => old from osx 10.10
-ruby '2.0.0' # => new from 10.14 mojave
+ruby '2.5.7' # => new from 10.14 mojave
 
 gem 'rails', '3.2.13'
 gem 'active_model_serializers'
