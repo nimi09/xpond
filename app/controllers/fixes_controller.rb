@@ -1,6 +1,6 @@
 class FixesController < ApplicationController
 
-    before_filter :admin_user, only: :destroy
+    before_action :admin_user, only: :destroy
 
     def new
         @fix = Fix.new
@@ -9,7 +9,7 @@ class FixesController < ApplicationController
     def create
         if current_user
             # Handle Fix.save and save as well user_id
-            @fix = current_user.fixes.build(params[:fix])
+            @fix = current_user.fixes.build(fix_params)
             if @fix.save
                 flash[:success] = '"' + @fix.name + '" successfull saved to the database! //  Your contribution: #{current_user.fixes.count}'
                 redirect_to new_fix_path
@@ -17,7 +17,7 @@ class FixesController < ApplicationController
                 render 'new'
             end
         else
-            @fix = Fix.new(params[:fix])
+            @fix = Fix.new(fix_params)
             if @fix.save
                 flash[:success] = '"' + @fix.name + '" successfull saved to the database!'
                 redirect_to new_fix_path
@@ -47,7 +47,7 @@ class FixesController < ApplicationController
     def update
         @fix = Fix.find(params[:id])
         @fix.user_id = current_user.id
-        if @fix.update_attributes(params[:fix])
+        if @fix.update_attributes( fix_params )
 #        if current_user.fixes.build(params[:fix], user_id: @fix.id)
 
 #            @fix.user_id = current_user.id
@@ -60,7 +60,7 @@ class FixesController < ApplicationController
     end
 
     def destroy
-        flash[:success] = @fix.name + " destroyed."
+        flash[:success] = @fix.name.to_s + " destroyed."
         @fix.destroy
         redirect_to fixes_path
     end
@@ -72,4 +72,9 @@ class FixesController < ApplicationController
             redirect_to(root_path) unless current_user.admin?
             redirect_to(fixes_path) if @fix.nil?
         end
+
+        def fix_params
+            params.require(:fix).permit(:lat, :lon, :name)
+        end
+
 end

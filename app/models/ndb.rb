@@ -16,7 +16,7 @@
 #
 
 class Ndb < ActiveRecord::Base
-    attr_accessible :elevation, :frq, :identifier, :lat, :lon, :name, :range
+    # attr_accessor :elevation, :frq, :identifier, :lat, :lon, :name, :range
     belongs_to :user
 
     before_save { |ndb| ndb.identifier = identifier.upcase }

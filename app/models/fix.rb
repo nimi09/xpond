@@ -12,7 +12,7 @@
 #
 
 class Fix < ActiveRecord::Base
-    attr_accessible :lat, :lon, :name
+    # attr_accessor :lat, :lon, :name
     belongs_to :user
 
     before_save { |fix| fix.name = name.upcase }

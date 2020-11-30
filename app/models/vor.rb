@@ -1,5 +1,5 @@
 class Vor < ActiveRecord::Base
-	attr_accessible :elevation, :frq, :identifier, :lat, :lon, :name, :range, :slaved
+	# attr_accessor :elevation, :frq, :identifier, :lat, :lon, :name, :range, :slaved
 	belongs_to :user
 
 	before_save { |vor| vor.identifier = identifier.upcase }	

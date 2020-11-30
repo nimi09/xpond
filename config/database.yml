@@ -1,3 +1,21 @@
+# development:
+#   <<: *default
+#   database: xpond_development
+
+
+# test:
+#   <<: *default
+#   database: xpond_test
+
+
+# production:
+#   <<: *default
+#   database: xpond_production
+#   username: xpond
+#   password: <%= ENV['XPOND_DATABASE_PASSWORD'] %>
+
+
+
 # SQLite version 3.x
 #   gem install sqlite3
 #

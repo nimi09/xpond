@@ -1,5 +1,5 @@
 Xpond::Application.routes.draw do
-  match "/latestfixes/:count", to: 'latest_fixes#index'
+  match "/latestfixes/:count" => 'latest_fixes#index', :via => [:get, :post]
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
@@ -7,18 +7,18 @@ Xpond::Application.routes.draw do
   resources :ndbs
   resources :vors
 
-  root to: 'static_pages#home'
+  root 'static_pages#home'
 
-  match '/signup',  to: 'users#new'
-  match '/login',  to: 'sessions#new'
-  match '/logout', to: 'sessions#destroy', via: :delete
+  match '/signup' => 'users#new',         via: :get
+  match '/login'  => 'sessions#new',      via: :get
+  match '/logout' => 'sessions#destroy',  via: :delete
 
-  match '/newfix',   to: 'fixes#new'
-  match '/map',      to: 'static_pages#map'
-  match '/map/:count', to: 'static_pages#adminmap'
-  match '/download', to: 'static_pages#download'
-  match '/newestfixes', to: 'static_pages#newest_fixes'
-  match '/totalrows', to: 'static_pages#totalrows'
+  match '/newfix'       => 'fixes#new',                   via: :get
+  match '/map'          => 'static_pages#map',            via: :get
+  match '/map/:count'   => 'static_pages#adminmap',       via: :get
+  match '/download'     => 'static_pages#download',       via: :get
+  match '/newestfixes'  => 'static_pages#newest_fixes',   via: :get
+  match '/totalrows'    => 'static_pages#totalrows',      via: :get
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

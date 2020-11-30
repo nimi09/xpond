@@ -24,12 +24,12 @@
                     <tbody>
                         <% @users.each do |user| %>
                             <tr>
-                                <td><%= link_to user.name, user%></td>
+                                <td><%= link_to user.name, user %></td>
                                 <td><%= user.fixes.count + user.ndbs.count + user.vors.count %></td>
                                 <% if current_user.admin? && !current_user?(user) %>
                                     <td><%= user.email %></td>
                                     <td><%= time_ago_in_words(user.created_at) %></td>
-                                    <td><%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete user:\n\n" + user.name } %>
+                                    <td><%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure? \nYou are about to delete user:\n\n" + user.name.to_s } %>
                                     </td>                            
                                 <% else %>
                                     <td></td>

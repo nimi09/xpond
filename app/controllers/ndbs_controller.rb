@@ -1,6 +1,6 @@
 class NdbsController < ApplicationController
 
-    before_filter :admin_user, only: :destroy
+    before_action :admin_user, only: :destroy
 
     def new
         @ndb = Ndb.new
@@ -8,7 +8,7 @@ class NdbsController < ApplicationController
 
     def create
         if current_user
-            @ndb = current_user.ndbs.build(params[:ndb])
+            @ndb = current_user.ndbs.build( ndb_params )
             if @ndb.save
                 flash[:success] = '"' + @ndb.identifier + '" successfull saved to the database!'
                 redirect_to new_ndb_path
@@ -16,7 +16,7 @@ class NdbsController < ApplicationController
                 render 'new'
             end
         else
-            @ndb = Ndb.new(params[:ndb])
+            @ndb = Ndb.new( ndb_params )
             if @ndb.save
                 flash[:success] = '"' + @ndb.identifier + '" successfull saved to the database!'
                 redirect_to new_ndb_path
@@ -44,7 +44,7 @@ class NdbsController < ApplicationController
         if current_user
             @ndb = Ndb.find(params[:id])
             @ndb.user_id = current_user.id
-            if @ndb.update_attributes(params[:ndb])
+            if @ndb.update_attributes( ndb_params )
                 flash[:success] = '"' + @ndb.identifier + '" successfull updated.'
                 redirect_to ndbs_path
             else
@@ -67,6 +67,10 @@ class NdbsController < ApplicationController
             @ndb = Ndb.find_by_id(params[:id])
             redirect_to(root_path) unless current_user.admin?
             redirect_to(ndbs_path) if @ndb.nil?
+        end
+
+        def ndb_params
+            params.require(:ndb).permit(:lat, :lon, :elevation, :frq, :range, :identifier, :name)
         end
 
 end

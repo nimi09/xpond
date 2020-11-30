@@ -1,35 +1,47 @@
 source 'https://rubygems.org'
-# ruby '1.9.3' # => old from osx 10.10
-ruby '2.5.7' # => new from 10.14 mojave
+ruby '2.7.2' # => new from 10.14 mojave
 
-gem 'rails', '3.2.13'
+gem 'rails', '5.2.4'
+
+# Use Puma as the app server
+gem 'puma', '~> 3.11'
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
 gem 'active_model_serializers'
-gem 'bcrypt-ruby', '3.0.1'
-gem 'will_paginate', '3.0.3'
-gem 'bootstrap-will_paginate', '0.0.6'
+gem 'bcrypt-ruby'
+gem 'will_paginate'
+#gem 'bootstrap-will_paginate', '0.0.6'
 #gem "gmaps4rails", "1.5.6"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'jquery-rails'
+
 group :development, :test do
-    gem 'sqlite3', '1.3.5'
-    gem 'rspec-rails', '2.11.0'
+    gem 'sqlite3'
 end
 
 group :development do
-    gem 'annotate', '2.5.0'
+  gem 'annotate', '2.5.0'
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '3.2.5'
-  gem 'coffee-rails', '3.2.2'
-  gem 'uglifier', '1.2.3'
+  gem 'sass-rails', '>= 5'
+# gem 'sass-rails',   '3.2.5'
+  gem 'coffee-rails'
+  gem 'uglifier'
 end
 
-gem 'jquery-rails', '2.0.2'
 
 group :test do
     gem 'capybara', '1.1.2'

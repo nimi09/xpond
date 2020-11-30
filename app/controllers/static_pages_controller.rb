@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 
-    before_filter :admin_user, only: [:newest_fixes]
-    before_filter :redirect_unless_admin, only: [:adminmap]
+    before_action :admin_user, only: [:newest_fixes]
+    before_action :redirect_unless_admin, only: [:adminmap]
 
     def home
         @fix_count = Fix.count
