@@ -47,6 +47,8 @@
 		var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
 			'<div style="padding: 0 0.5rem;"><div style="font-weight: bold; font-size: 1rem;">' + e.name + '</div>' + e.lat + ', ' + e.lon + '</div>');
 
+		console.log(e.name, e.lat, e.lon);
+
 		new mapboxgl.Marker(el)
 			.setLngLat([e.lat, e.lon])
 			.setPopup(popup) // sets a popup on this marker
