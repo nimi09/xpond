@@ -15,6 +15,9 @@ class StaticPagesController < ApplicationController
         @ndb = Ndb.order('identifier ASC').all
     end
 
+    def mapbox
+    end
+
     def map
     end
 
