@@ -3,12 +3,26 @@
 
 <div class="std-block">
     <div class="container">
-    	<h1>Mapbox</h1>
         <h1>Explore all added FIX and NDB points on the map</h1>
         <div class="map-box">
-            <div id="mapCanvas" style="display: none; margin: 0; padding: 0; width: 100%; height: 500px;">
-            </div>
             <div id='map' style='width: 100%; height: 500px;'></div>
+			<div id="menu">
+				<input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked" />
+				<label for="streets-v11" style="margin-right: 1rem;">street view</label>
+				<input id="satellite-v9" type="radio" name="rtoggle" value="satellite" />
+				<label for="satellite-v9">satellite view</label>
+				<style>
+					#menu {
+						position: absolute;
+						padding: 5px 10px;
+						top: 10px;
+						left: 10px;
+						background: #fff;
+						border-radius: 3px;
+					}
+				</style>
+			</div>
+
         </div>
     </div>
 </div>
@@ -22,6 +36,26 @@
 		center: [0, 25], // starting position [lng, lat]
 		zoom: 1 // starting zoom
 	});
+
+	// Add zoom and rotation controls to the map.
+	map.addControl(new mapboxgl.NavigationControl());
+
+	// Add Satelite View capabilities
+	var layerList = document.getElementById('menu');
+	var inputs = layerList.getElementsByTagName('input');
+	 
+	function switchLayer(layer) {
+		var layerId = layer.target.id;
+		map.setStyle('mapbox://styles/mapbox/' + layerId);
+	}
+	 
+	for (var i = 0; i < inputs.length; i++) {
+		inputs[i].onclick = switchLayer;
+	}
+
+
+
+
 
 	var fixes;
 	var vors;
