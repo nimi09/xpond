@@ -50,7 +50,7 @@
 		console.log(e.name, e.lat, e.lon);
 
 		new mapboxgl.Marker(el)
-			.setLngLat([e.lat, e.lon])
+			.setLngLat([e.lon, e.lat])
 			.setPopup(popup) // sets a popup on this marker
 			.addTo(map);
     });
