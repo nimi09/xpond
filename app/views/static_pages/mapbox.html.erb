@@ -47,8 +47,6 @@
 		var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
 			'<div style="padding: 0 0.5rem;"><div style="font-weight: bold; font-size: 1rem;">' + e.name + '</div>' + e.lat + ', ' + e.lon + '</div>');
 
-		console.log(e.name, e.lat, e.lon);
-
 		new mapboxgl.Marker(el)
 			.setLngLat([e.lon, e.lat])
 			.setPopup(popup) // sets a popup on this marker
@@ -77,7 +75,7 @@
 			'<div style="padding: 0 0.5rem;"><div style="font-weight: bold; font-size: 1rem;">' + e.name + '</div>' + e.lat + ', ' + e.lon + '</div>');
 
 		new mapboxgl.Marker(el)
-			.setLngLat([e.lat, e.lon])
+			.setLngLat([e.lon, e.lat])
 			.setPopup(popup) // sets a popup on this marker
 			.addTo(map);
     });
@@ -103,7 +101,7 @@
 			'<div style="padding: 0 0.5rem;"><div style="font-weight: bold; font-size: 1rem;">' + e.identifier + '</div>' + e.lat + ', ' + e.lon + '</div>');
 
 		new mapboxgl.Marker(el)
-			.setLngLat([e.lat, e.lon])
+			.setLngLat([e.lon, e.lat])
 			.setPopup(popup) // sets a popup on this marker
 			.addTo(map);
     });
