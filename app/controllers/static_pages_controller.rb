@@ -15,10 +15,10 @@ class StaticPagesController < ApplicationController
         @ndb = Ndb.order('identifier ASC').all
     end
 
-    def mapbox
+    def map
     end
 
-    def map
+    def gmap
     end
 
     def adminmap

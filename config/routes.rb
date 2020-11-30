@@ -14,8 +14,8 @@ Xpond::Application.routes.draw do
   match '/logout' => 'sessions#destroy',  via: :delete
 
   match '/newfix'       => 'fixes#new',                   via: :get
-  match '/mapbox'       => 'static_pages#mapbox',         via: :get
   match '/map'          => 'static_pages#map',            via: :get
+  match '/gmap'         => 'static_pages#gmap',           via: :get
   match '/map/:count'   => 'static_pages#adminmap',       via: :get
   match '/download'     => 'static_pages#download',       via: :get
   match '/newestfixes'  => 'static_pages#newest_fixes',   via: :get
