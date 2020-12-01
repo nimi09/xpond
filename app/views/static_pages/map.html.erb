@@ -1,5 +1,12 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+	.mapboxgl-popup-close-button {
+		padding: .2rem .5rem;
+		font-size: 1rem;
+		z-index: +1;
+	}
+</style>
 
 <div class="std-block">
     <div class="container">
@@ -73,7 +80,7 @@
     fixes.forEach( e => {
     	var el = document.createElement('div');
 		el.className = 'marker';
-		el.style.backgroundImage = 'url(<%= asset_url("fix-marker.png") %>)';
+		el.style.backgroundImage = 'url(<%= asset_url("FIX-25.svg") %>)';
 		el.style.width = '25px';
 		el.style.height = '25px';
 
@@ -100,7 +107,7 @@
     vors.forEach( e => {
     	var el = document.createElement('div');
 		el.className = 'marker';
-		el.style.backgroundImage = 'url(<%= asset_url("vor-marker.png") %>)';
+		el.style.backgroundImage = 'url(<%= asset_url("VOR-25.svg") %>)';
 		el.style.width = '25px';
 		el.style.height = '25px';
 
@@ -126,7 +133,7 @@
     ndbs.forEach( e => {
     	var el = document.createElement('div');
 		el.className = 'marker';
-		el.style.backgroundImage = 'url(<%= asset_url("ndb-marker.png") %>)';
+		el.style.backgroundImage = 'url(<%= asset_url("NDB-25.svg") %>)';
 		el.style.width = '25px';
 		el.style.height = '25px';
 
