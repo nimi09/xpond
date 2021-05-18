@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.2' # => new from 10.14 mojave
+ruby '2.7.3' # => new from 10.14 mojave
 
 gem 'rails', '5.2.6'
 
