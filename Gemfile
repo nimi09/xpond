@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.7.2' # => new from 10.14 mojave
 
-gem 'rails', '5.2.4'
+gem 'rails', '5.2.6'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
