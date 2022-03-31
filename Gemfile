@@ -4,7 +4,7 @@ ruby '2.7.3' # => new from 10.14 mojave
 gem 'rails', '5.2.6'
 
 # Use Puma as the app server
-gem 'puma', '4.3.8'  # '~> 3.11'
+gem 'puma', '4.3.12' # '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
